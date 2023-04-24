@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/SBNZ-chocolate-backend.iml" filepath="$PROJECT_DIR$/.idea/SBNZ-chocolate-backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kjar-example/drools-spring-app/drools-spring-app.iml" filepath="$PROJECT_DIR$/kjar-example/drools-spring-app/drools-spring-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kjar-example/facts/facts.iml" filepath="$PROJECT_DIR$/kjar-example/facts/facts.iml" />
+    </modules>
+  </component>
+</project>
