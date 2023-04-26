@@ -25,6 +25,7 @@ public class UserController {
 
 
   //  private static Logger log = (Logger) LoggerFactory.getLogger(UserController.class);
+
   @Autowired
     private final UserService userService;
 
@@ -51,7 +52,7 @@ public class UserController {
         return new ResponseEntity<>(userService.login(user), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/regsiter", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> register(@RequestBody User user) {
         return new ResponseEntity<>(userService.register(user), HttpStatus.OK);
     }

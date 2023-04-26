@@ -5,5 +5,6 @@ public enum UserRank {
     NONE,
     BRONZE,
     SILVER,
-    GOLD
+    GOLD,
+    PLATINUM
 }

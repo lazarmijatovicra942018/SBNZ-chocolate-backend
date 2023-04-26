@@ -35,8 +35,8 @@ public class UserRepository {
 
     private void initUsers(){
         users = new ArrayList<>();
-        User user1 = new User("lazar@gmail.com ","lazar","Lazar", "Mijatovic" , "566577" , UserType.ADMINISTRATOR ,UserRank.NONE);
-
+        User user1 = new User("lazar@gmail.com","lazar","Lazar", "Mijatovic" , "566577" , UserType.ADMINISTRATOR ,UserRank.PLATINUM);
+        loggedUser = user1;
         this.users.add(user1);
 
     }

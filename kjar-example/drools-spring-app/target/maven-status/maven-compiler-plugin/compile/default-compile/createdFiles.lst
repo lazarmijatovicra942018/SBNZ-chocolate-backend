@@ -1,4 +1,7 @@
-chocolate_recomendation\controller\UserController.class
-chocolate_recomendation\ChocolateRecomendationApp.class
+chocolate_recomendation\repository\ChocolateRepository.class
 chocolate_recomendation\service\UserService.class
 chocolate_recomendation\repository\UserRepository.class
+chocolate_recomendation\service\ChocolateService.class
+chocolate_recomendation\controller\UserController.class
+chocolate_recomendation\controller\ChocolateController.class
+chocolate_recomendation\ChocolateRecomendationApp.class

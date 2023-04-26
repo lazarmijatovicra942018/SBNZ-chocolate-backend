@@ -1,7 +1,15 @@
 <org.drools.core.rule.KieModuleMetaInfo>
   <typeMetaInfos>
     <entry>
-      <string>demo.facts.Item</string>
+      <string>demo.facts.Chocolate</string>
+      <org.drools.core.rule.TypeMetaInfo>
+        <kind>CLASS</kind>
+        <role>FACT</role>
+        <isDeclaredType>false</isDeclaredType>
+      </org.drools.core.rule.TypeMetaInfo>
+    </entry>
+    <entry>
+      <string>demo.facts.User</string>
       <org.drools.core.rule.TypeMetaInfo>
         <kind>CLASS</kind>
         <role>FACT</role>
@@ -11,10 +19,16 @@
   </typeMetaInfos>
   <rulesByPackage>
     <entry>
-      <string>sbnz.integracija</string>
+      <string>rules.forward_chaining</string>
       <set>
-        <string>Classify Item - Low Range</string>
-        <string>Classify Item - High Range</string>
+        <string>Discount for silver user</string>
+        <string>Discount for 20 and more candies</string>
+        <string>Calculating new price</string>
+        <string>Discount for platinum user</string>
+        <string>Discount for 10-19  candies</string>
+        <string>Discount for bronze user</string>
+        <string>Discount for gold user</string>
+        <string>Discount for 5-9  candies</string>
       </set>
     </entry>
   </rulesByPackage>

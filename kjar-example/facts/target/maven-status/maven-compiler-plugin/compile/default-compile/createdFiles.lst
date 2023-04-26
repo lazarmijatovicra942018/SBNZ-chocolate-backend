@@ -1,4 +1,5 @@
 demo\facts\Item.class
+demo\facts\Chocolate.class
 demo\facts\UserRank.class
 demo\facts\Item$Category.class
 demo\facts\User.class

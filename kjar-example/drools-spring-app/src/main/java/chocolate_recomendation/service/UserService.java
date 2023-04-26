@@ -2,6 +2,8 @@ package chocolate_recomendation.service;
 
 import chocolate_recomendation.repository.UserRepository;
 import demo.facts.User;
+import demo.facts.UserRank;
+import demo.facts.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,7 @@ import java.util.List;
 
 @Service
 public class UserService {
+
 
 
     private final UserRepository repository;
@@ -25,13 +28,13 @@ public class UserService {
 
     public Object login(User user) {
         List<User> users = repository.getUsers();
-        User retVal = users.stream().filter(u->u.getEmail().equals(user.getEmail()) && u.getPassword().equals(user.getPassword())).findFirst().orElse(null);
+        User retVal = users.stream().filter(u->u.getEmail().trim().equals(user.getEmail().trim()) && u.getPassword().trim().equals(user.getPassword().trim())).findFirst().orElse(null);
 
         if (retVal != null) {
             this.repository.setLoggedUser(user);
             return retVal;
         }
-        else if (users.stream().filter(u->u.getEmail().equals(user.getEmail())).findFirst().orElse(null) != null) {
+        else if (users.stream().filter(u->u.getEmail().trim().equals(user.getEmail().trim())).findFirst().orElse(null) != null) {
             return "\"" + " Password is incorect !" + "\"";
         }
         else {
@@ -47,6 +50,8 @@ public class UserService {
         User retVal = users.stream().filter(u->u.getEmail().equals(user.getEmail())).findFirst().orElse(null);
 
         if (retVal == null) {
+            user.setUserRank(UserRank.NONE);
+            user.setUserType(UserType.REGISTERED_USER);
             this.repository.addUser(user);
             return user;
         }
