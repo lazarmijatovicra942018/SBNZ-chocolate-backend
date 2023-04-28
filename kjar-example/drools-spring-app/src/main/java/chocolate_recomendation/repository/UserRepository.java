@@ -12,6 +12,7 @@ import java.util.List;
 @Repository
 public class UserRepository {
 
+    private static UserRepository instance = new UserRepository();
     private List<User> users;
 
     private User loggedUser;
@@ -24,20 +25,25 @@ public class UserRepository {
         this.loggedUser = loggedUser;
     }
 
+
+    public static UserRepository getInstance() {
+        return instance;
+    }
+
     public UserRepository(){
 
-        if(users== null) {
             initUsers();
-        }
 
     }
 
 
     private void initUsers(){
         users = new ArrayList<>();
-        User user1 = new User("lazar@gmail.com","lazar","Lazar", "Mijatovic" , "566577" , UserType.ADMINISTRATOR ,UserRank.PLATINUM);
-        loggedUser = user1;
+        User user1 = new User("lazar@gmail.com","lazar","Lazar", "Mijatovic" , "566577" , UserType.ADMINISTRATOR ,UserRank.NONE);
+        User user2 = new User("marko@gmail.com","marko","Marko", "Mijatovic" , "566577" , UserType.REGISTERED_USER ,UserRank.NONE);
+        this.loggedUser = user2;
         this.users.add(user1);
+        this.users.add(user2);
 
     }
 
@@ -45,10 +51,8 @@ public class UserRepository {
        return users;
     }
 
+
     public void addUser(User user){
         this.users.add(user);
     }
-
-
-
 }

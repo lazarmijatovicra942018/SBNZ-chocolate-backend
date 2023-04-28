@@ -41,6 +41,7 @@ rule "Discount for bronze user"
         modify($c){setDiscount($c.getDiscount()+3)};
 end
 
+
 rule "Discount for silver user"
     agenda-group "discount"
     when
@@ -72,6 +73,53 @@ rule "Discount for platinum user"
     then
         modify($c){setDiscount($c.getDiscount()+10)};
 end
+
+
+
+
+rule "Discount for none user and spent more than 1000"
+    agenda-group "discount"
+    when
+        $c: Chocolate(ammount>100)
+        $u:User(userRank == UserRank.NONE)
+
+    then
+        modify($c){setDiscount(99)};
+end
+
+
+rule "Discount for bronze user and spent more than 2000"
+    agenda-group "discount"
+    when
+        $c: Chocolate(price > 2000.0)
+        $u:User(userRank == UserRank.BRONZE)
+
+    then
+        modify($c){setDiscount($c.getDiscount()+2)};
+end
+
+
+rule "Discount for silver user and spent more than 3000"
+    agenda-group "discount"
+    when
+        $c: Chocolate(price > 3000.0)
+        $u:User(userRank == UserRank.SILVER)
+
+    then
+        modify($c){setDiscount($c.getDiscount()+2)};
+end
+
+
+rule "Discount for gold user and spent more than 4000"
+    agenda-group "discount"
+    when
+        $c: Chocolate(price > 4000.0)
+        $u:User(userRank == UserRank.GOLD)
+
+    then
+        modify($c){setDiscount($c.getDiscount()+2)};
+end
+
 
 
 

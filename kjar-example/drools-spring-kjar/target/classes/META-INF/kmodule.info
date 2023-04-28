@@ -23,10 +23,14 @@
       <set>
         <string>Discount for silver user</string>
         <string>Discount for 20 and more candies</string>
+        <string>Discount for bronze user and spent more than 2000</string>
+        <string>Discount for gold user and spent more than 4000</string>
         <string>Calculating new price</string>
+        <string>Discount for silver user and spent more than 3000</string>
         <string>Discount for platinum user</string>
         <string>Discount for 10-19  candies</string>
         <string>Discount for bronze user</string>
+        <string>Discount for none user and spent more than 1000</string>
         <string>Discount for gold user</string>
         <string>Discount for 5-9  candies</string>
       </set>

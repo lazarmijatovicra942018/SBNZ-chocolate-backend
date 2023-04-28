@@ -8,18 +8,20 @@ import java.util.List;
 @Repository
 public class ChocolateRepository {
 
-    private List<String> ingridians;
+    private static ChocolateRepository instance = new ChocolateRepository();
+    private List<String> ingrediants;
     public List<Chocolate> chocolates;
-    public ChocolateRepository(){
-        initChocolates();
+
+    public ChocolateRepository() {
+        this.initChocolates();
     }
 
-    public List<String> getIngridians() {
-        return ingridians;
+    public List<String> getIngrediants() {
+        return ingrediants;
     }
 
-    public void setIngridians(List<String> ingridians) {
-        this.ingridians = ingridians;
+    public void setIngrediants(List<String> ingredians) {
+        this.ingrediants = ingredians;
     }
 
     public List<Chocolate> getChocolates() {
@@ -30,26 +32,30 @@ public class ChocolateRepository {
         this.chocolates = chocolates;
     }
 
-    private void initIngridians(){
-        ingridians =new ArrayList<>();
-        ingridians.add("crna cokolada");
-        ingridians.add("bela cokolada");
-        ingridians.add("mlecna cokolada");
-        ingridians.add("karamela");
-        ingridians.add("keks");
-        ingridians.add("jagoda");
-        ingridians.add("nugat");
-        ingridians.add("kikiriki");
-        ingridians.add("pistaci");
+    public static ChocolateRepository getInstance() {
+        return instance;
+    }
+
+    private void initIngredians(){
+        ingrediants =new ArrayList<>();
+        ingrediants.add("crna cokolada");
+        ingrediants.add("bela cokolada");
+        ingrediants.add("mlecna cokolada");
+        ingrediants.add("karamela");
+        ingrediants.add("keks");
+        ingrediants.add("jagoda");
+        ingrediants.add("nugat");
+        ingrediants.add("kikiriki");
+        ingrediants.add("pistaci");
 
     }
     public void initChocolates(){
-        this.initIngridians();
+        this.initIngredians();
         chocolates = new ArrayList<>();
-        List<String> ingridians1= new ArrayList<>();
-        ingridians1.add(ingridians.get(2));
-        ingridians1.add(ingridians.get(3));
-        Chocolate c1 = new Chocolate("Mars", ingridians1,"Mars" , 50);
+        List<String> ingrediants1= new ArrayList<>();
+        ingrediants1.add(ingrediants.get(2));
+        ingrediants1.add(ingrediants.get(3));
+        Chocolate c1 = new Chocolate("Mars", ingrediants1,"Mars" , 50);
         c1.setAmmount(6);
         chocolates.add(c1);
 

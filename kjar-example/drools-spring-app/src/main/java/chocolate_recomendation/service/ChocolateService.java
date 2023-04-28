@@ -16,11 +16,11 @@ import java.util.List;
 @Service
 public class ChocolateService {
 
-    @Autowired
-    private final ChocolateRepository repository;
 
-    @Autowired
-    private final UserRepository userRepository;
+    private final ChocolateRepository repository = ChocolateRepository.getInstance();
+
+
+    private final UserRepository userRepository = UserRepository.getInstance();
 
     private final KieContainer kieContainer;
 
@@ -28,9 +28,7 @@ public class ChocolateService {
 
 
     @Autowired
-    public ChocolateService(ChocolateRepository repository, UserRepository userRepository, KieContainer kieContainer) {
-        this.repository = repository;
-        this.userRepository = userRepository;
+    public ChocolateService(KieContainer kieContainer) {
         this.kieContainer = kieContainer;
 
     }
@@ -48,6 +46,26 @@ public class ChocolateService {
 
         for(Chocolate c : original){
             Chocolate cl = new Chocolate(c);
+            chocolates.add(cl);
+            kieSession.insert(cl);
+        }
+        kieSession.insert(userRepository.getLoggedUser());
+        kieSession.getAgenda().getAgendaGroup("discount").setFocus();
+        kieSession.fireAllRules();
+        kieSession.dispose();
+        return chocolates;
+
+    }
+
+    public List<Chocolate> getDiscountedChocolateWithAmmount(int ammount){
+
+        KieSession kieSession = kieContainer.newKieSession();
+        List<Chocolate> original = repository.getChocolates();
+        List<Chocolate> chocolates = new ArrayList<>();
+
+        for(Chocolate c : original){
+            Chocolate cl = new Chocolate(c);
+            cl.setAmmount(ammount);
             chocolates.add(cl);
             kieSession.insert(cl);
         }

@@ -16,8 +16,10 @@ import java.util.List;
 public class ChocolateController {
 
     private static Logger log = LoggerFactory.getLogger(ChocolateController.class);
+
     @Autowired
     private final ChocolateService chocolateService;
+
 
     @Autowired
     public ChocolateController(ChocolateService chocolateService) {
@@ -30,6 +32,14 @@ public class ChocolateController {
         return chocolateService.getDiscountedChocolate();
         //return new ResponseEntity<>("{Hej}", HttpStatus.OK);
     }
+
+
+    @RequestMapping(value = "/discount/{ammount}", method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<Chocolate> findDiscountChocolateWithAmmount(@PathVariable int ammount) {
+        return chocolateService.getDiscountedChocolateWithAmmount(ammount);
+    }
+
+
     @RequestMapping( method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
     public List<Chocolate> findAll() {
         return chocolateService.getAll();

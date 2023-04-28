@@ -7,7 +7,7 @@ public class Chocolate implements Serializable {
 
     public String name;
 
-    public List<String> ingridiants;
+    public List<String> ingrediants;
 
     public String manufacturer;
 
@@ -42,11 +42,11 @@ public class Chocolate implements Serializable {
     }
 
     public List<String> getIngridiants() {
-        return ingridiants;
+        return ingrediants;
     }
 
     public void setIngridiants(List<String> ingridiants) {
-        this.ingridiants = ingridiants;
+        this.ingrediants = ingridiants;
     }
 
     public String getManufacturer() {
@@ -70,16 +70,16 @@ public class Chocolate implements Serializable {
 
     public Chocolate(String name, List<String> ingridiants, String manufacturer, float price) {
         this.name = name;
-        this.ingridiants = ingridiants;
+        this.ingrediants = ingridiants;
         this.manufacturer = manufacturer;
         this.price = price;
         this.discount =0;
         this.ammount = 1;
     }
 
-    public Chocolate(String name, List<String> ingridiants, String manufacturer, float price, float discount, int ammount) {
+    public Chocolate(String name, List<String> ingrediants, String manufacturer, float price, float discount, int ammount) {
         this.name = name;
-        this.ingridiants = ingridiants;
+        this.ingrediants = ingrediants;
         this.manufacturer = manufacturer;
         this.price = price;
         this.discount = discount;
@@ -92,7 +92,7 @@ public class Chocolate implements Serializable {
 
     public Chocolate(Chocolate c) {
         this.name = c.getName();
-        this.ingridiants = c.getIngridiants();
+        this.ingrediants = c.getIngridiants();
         this.manufacturer = c.getManufacturer();
         this.price = c.getPrice();
         this.discount = c.getDiscount();
