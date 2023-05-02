@@ -80,18 +80,18 @@ end
 rule "Discount for none user and spent more than 1000"
     agenda-group "discount"
     when
-        $c: Chocolate(ammount>100)
+        $c: Chocolate((price*ammount)>1000.0)
         $u:User(userRank == UserRank.NONE)
 
     then
-        modify($c){setDiscount(99)};
+        modify($c){setDiscount($c.getDiscount()+2)};
 end
 
 
 rule "Discount for bronze user and spent more than 2000"
     agenda-group "discount"
     when
-        $c: Chocolate(price > 2000.0)
+        $c: Chocolate((price*ammount) > 2000.0)
         $u:User(userRank == UserRank.BRONZE)
 
     then
@@ -102,7 +102,7 @@ end
 rule "Discount for silver user and spent more than 3000"
     agenda-group "discount"
     when
-        $c: Chocolate(price > 3000.0)
+        $c: Chocolate((price*ammount)> 3000.0)
         $u:User(userRank == UserRank.SILVER)
 
     then
@@ -113,23 +113,11 @@ end
 rule "Discount for gold user and spent more than 4000"
     agenda-group "discount"
     when
-        $c: Chocolate(price > 4000.0)
+        $c: Chocolate((price*ammount) > 4000.0)
         $u:User(userRank == UserRank.GOLD)
 
     then
         modify($c){setDiscount($c.getDiscount()+2)};
-end
-
-
-
-
-rule "Calculating new price"
-    salience -5
-    agenda-group "discount"
-    when
-        $c: Chocolate(discount>0)
-    then
-        modify($c){setPrice($c.getPrice()*(100-$c.getDiscount())/100)};
 end
 
 

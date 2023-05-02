@@ -74,7 +74,7 @@ public class Chocolate implements Serializable {
         this.manufacturer = manufacturer;
         this.price = price;
         this.discount =0;
-        this.ammount = 1;
+        this.ammount = 0;
     }
 
     public Chocolate(String name, List<String> ingrediants, String manufacturer, float price, float discount, int ammount) {
