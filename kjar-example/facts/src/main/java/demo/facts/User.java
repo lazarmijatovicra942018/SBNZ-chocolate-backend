@@ -12,6 +12,7 @@ public class User implements Serializable{
     private String name;
     private String surname;
     private String phoneNum;
+
     private UserType userType;
 
     private UserRank userRank;
