@@ -1,0 +1,41 @@
+package rules;
+import demo.facts.Item;
+import demo.facts.Chocolate;
+import demo.facts.User;
+import java.util.List
+import demo.facts.ChocolateGrade;
+import java.util.ArrayList;
+
+global Integer myGlobalGrade;
+
+
+
+rule "Calculate grade for chocolate"
+    agenda-group "grading"
+when
+
+      $chocolate: Chocolate($chocoName: name)
+          accumulate(
+            ChocolateGrade(chocolateName == $chocoName,$g: grade),
+            $avg: average($g)
+          )
+then
+    modify($chocolate){setGrade($avg)};
+end
+
+
+
+rule "Put my grade for chocolate"
+    agenda-group "grading"
+    when
+        $u:User($email :email)
+        $cg: ChocolateGrade($chocolateName: chocolateName,userEmail ==  $email)
+        $c: Chocolate(name == $chocolateName)
+
+    then
+        modify($c){setMyGrade($cg.getGrade())};
+end
+
+
+
+

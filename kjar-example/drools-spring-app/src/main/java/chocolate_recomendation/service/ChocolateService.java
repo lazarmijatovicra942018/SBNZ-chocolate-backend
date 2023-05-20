@@ -1,8 +1,10 @@
 package chocolate_recomendation.service;
 
+import chocolate_recomendation.repository.ChocolateGradeRepository;
 import chocolate_recomendation.repository.ChocolateRepository;
 import chocolate_recomendation.repository.UserRepository;
 import demo.facts.Chocolate;
+import demo.facts.ChocolateGrade;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.slf4j.Logger;
@@ -22,6 +24,7 @@ public class ChocolateService {
 
     private final UserRepository userRepository = UserRepository.getInstance();
 
+    private final ChocolateGradeRepository chocolateGradeRepository = ChocolateGradeRepository.getInstance();
     private final KieContainer kieContainer;
 
     private static Logger log = LoggerFactory.getLogger(ChocolateService.class);
@@ -36,6 +39,14 @@ public class ChocolateService {
     public List<Chocolate> getAll(){
         return repository.getChocolates();
     }
+
+    public List<String> getAllIngredients(){
+        return repository.getIngredients();
+    }
+
+
+
+
 
 
     public List<Chocolate> getDiscountedChocolate(){
@@ -69,11 +80,37 @@ public class ChocolateService {
             chocolates.add(cl);
             kieSession.insert(cl);
         }
+
+        List<ChocolateGrade> chocolateGrades = chocolateGradeRepository.getChocolateGrades();
+
+        for(ChocolateGrade cg : chocolateGrades){
+            kieSession.insert(cg);
+        }
+
+
         kieSession.insert(userRepository.getLoggedUser());
         kieSession.getAgenda().getAgendaGroup("discount").setFocus();
         kieSession.fireAllRules();
+
+        kieSession.getAgenda().getAgendaGroup("grading").setFocus();
+        kieSession.fireAllRules();
+
+        kieSession.getAgenda().getAgendaGroup("addOrUpdateGrade").setFocus();
+        kieSession.fireAllRules();
+
         kieSession.dispose();
         return chocolates;
+
+    }
+
+
+    public void AddOrUpdateChocolateGrade(ChocolateGrade chocolateGrade){
+        List<ChocolateGrade> chocolateGrades = new ArrayList<>();
+        chocolateGrades = chocolateGradeRepository.
+        for(ChocolateGrade cg : chocolateGrades){
+        }
+
+
 
     }
 

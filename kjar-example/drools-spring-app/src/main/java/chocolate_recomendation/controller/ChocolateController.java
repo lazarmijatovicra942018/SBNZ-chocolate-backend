@@ -43,7 +43,13 @@ public class ChocolateController {
     @RequestMapping( method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
     public List<Chocolate> findAll() {
         return chocolateService.getAll();
-        //return new ResponseEntity<>("{Hej}", HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/ingredients",method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<String> findAllIngredients() {
+        return chocolateService.getAllIngredients();
+
+    }
+
 
 }

@@ -9,19 +9,19 @@ import java.util.List;
 public class ChocolateRepository {
 
     private static ChocolateRepository instance = new ChocolateRepository();
-    private List<String> ingrediants;
-    public List<Chocolate> chocolates;
+    private static List<String> ingredients;
+    public static List<Chocolate> chocolates;
 
     public ChocolateRepository() {
         this.initChocolates();
     }
 
-    public List<String> getIngrediants() {
-        return ingrediants;
+    public static List<String> getIngredients() {
+        return ingredients;
     }
 
-    public void setIngrediants(List<String> ingredians) {
-        this.ingrediants = ingredians;
+    public static void setIngredients(List<String> ingredients) {
+        ChocolateRepository.ingredients = ingredients;
     }
 
     public List<Chocolate> getChocolates() {
@@ -37,18 +37,18 @@ public class ChocolateRepository {
     }
 
     private void initIngredians(){
-        ingrediants =new ArrayList<>();
-        ingrediants.add("crna cokolada");
-        ingrediants.add("bela cokolada");
-        ingrediants.add("mlecna cokolada");
-        ingrediants.add("karamela");//3
-        ingrediants.add("keks");
-        ingrediants.add("jagoda");//5
-        ingrediants.add("nugat");
-        ingrediants.add("kikiriki");
-        ingrediants.add("pistaci");
-        ingrediants.add("kokos");//9
-        ingrediants.add("mleko");//10
+        ingredients =new ArrayList<>();
+        ingredients.add("crna cokolada");
+        ingredients.add("bela cokolada");
+        ingredients.add("mlecna cokolada");
+        ingredients.add("karamela");//3
+        ingredients.add("keks");
+        ingredients.add("jagoda");//5
+        ingredients.add("nugat");
+        ingredients.add("kikiriki");
+        ingredients.add("pistaci");
+        ingredients.add("kokos");//9
+        ingredients.add("mleko");//10
 
 
 
@@ -56,38 +56,38 @@ public class ChocolateRepository {
     public void initChocolates(){
         this.initIngredians();
         chocolates = new ArrayList<>();
-        List<String> ingrediants1= new ArrayList<>();
-        ingrediants1.add(ingrediants.get(2));
-        ingrediants1.add(ingrediants.get(3));
-        Chocolate c1 = new Chocolate("Mars", ingrediants1,"Mars" , 50);
+        List<String> ingredients1= new ArrayList<>();
+        ingredients1.add(ingredients.get(2));
+        ingredients1.add(ingredients.get(3));
+        Chocolate c1 = new Chocolate("Mars", ingredients1,"Mars" , 50);
         chocolates.add(c1);
 
-        List<String> ingrediants2= new ArrayList<>();
-        ingrediants2.add(ingrediants.get(2));
-        ingrediants2.add(ingrediants.get(9));
-        Chocolate c2 = new Chocolate("Bounty", ingrediants2,"Mars" , 75);
+        List<String> ingredients2= new ArrayList<>();
+        ingredients2.add(ingredients.get(2));
+        ingredients2.add(ingredients.get(9));
+        Chocolate c2 = new Chocolate("Bounty", ingredients2,"Mars" , 75);
         chocolates.add(c2);
 
 
-        List<String> ingrediants3= new ArrayList<>();
-        ingrediants3.add(ingrediants.get(2));
-        ingrediants3.add(ingrediants.get(3));
-        ingrediants3.add(ingrediants.get(4));
+        List<String> ingredients3= new ArrayList<>();
+        ingredients3.add(ingredients.get(2));
+        ingredients3.add(ingredients.get(3));
+        ingredients3.add(ingredients.get(4));
 
-        Chocolate c3 = new Chocolate("Twix", ingrediants3,"Mars" , 75);
+        Chocolate c3 = new Chocolate("Twix", ingredients3,"Mars" , 75);
         chocolates.add(c3);
 
         List<String> ingrediants4= new ArrayList<>();
-        ingrediants4.add(ingrediants.get(2));
-        ingrediants4.add(ingrediants.get(10));
+        ingrediants4.add(ingredients.get(2));
+        ingrediants4.add(ingredients.get(10));
         Chocolate c4 = new Chocolate("Kidy sa mlekom", ingrediants4,"Pionir" , 33);
         chocolates.add(c4);
 
 
-        List<String> ingrediants5= new ArrayList<>();
-        ingrediants5.add(ingrediants.get(2));
-        ingrediants5.add(ingrediants.get(5));
-        Chocolate c5 = new Chocolate("Kidy sa jagodom", ingrediants5,"Pionir" , 33);
+        List<String> ingredients5= new ArrayList<>();
+        ingredients5.add(ingredients.get(2));
+        ingredients5.add(ingredients.get(5));
+        Chocolate c5 = new Chocolate("Kidy sa jagodom", ingredients5,"Pionir" , 33);
         chocolates.add(c5);
 
 

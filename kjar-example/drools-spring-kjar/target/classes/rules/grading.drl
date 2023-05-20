@@ -1,0 +1,82 @@
+package rules;
+import demo.facts.Item;
+import demo.facts.Chocolate;
+import demo.facts.User;
+import java.util.List
+import demo.facts.ChocolateGrade;
+import java.util.ArrayList;
+
+global Integer myGlobalGrade;
+
+
+
+rule "Calculate grade for chocolate"
+    agenda-group "grading"
+when
+
+      $chocolate: Chocolate($chocoName: name)
+          accumulate(
+            ChocolateGrade(chocolateName == $chocoName,$g: grade),
+            $avg: average($g)
+          )
+then
+    modify($chocolate){setGrade($avg)};
+end
+
+
+rule "Put my grade for chocolate"
+    agenda-group "grading"
+    when
+        $u:User($email :email)
+        $cg: ChocolateGrade($chocolateName: chocolateName,userEmail ==  $email)
+        $c: Chocolate(name == $chocolateName)
+
+    then
+        modify($c){setMyGrade($cg.getGrade())};
+end
+
+
+rule "Add or update chocolate grade"
+    agenda-group "addOrUpdateGrade"
+    salience 2
+
+    lock-on-active  true
+    when
+
+        $c: Chocolate()
+
+    /*
+        $u:User($email :email)
+        $cg: ChocolateGrade($chocolateName: chocolateName,userEmail ==  $email)
+        $c: Chocolate(name == $chocolateName)
+*/
+    then
+        System.out.println( myGlobalGrade);
+        //$firstRuleExecuted:insert(new Boolean(true));
+       // modify($c){setMyGrade($cg.getGrade())};
+        myGlobalGrade +=1;
+
+end
+
+
+rule "Add new chocolate grade"
+    agenda-group "addOrUpdateGrade"
+    salience 1
+    lock-on-active
+    when
+        $c: Chocolate()
+
+    /*
+        $u:User($email :email)
+        $cg: ChocolateGrade($chocolateName: chocolateName,userEmail ==  $email)
+        $c: Chocolate(name == $chocolateName)
+*/
+    then
+        // String myGlobalVariable = (String) globalMap.get("myGlobal");
+         //System.out.println("Global variable value: " + myGlobalVariable);
+        System.out.println("22222222222222222222222222222222222");
+    //    modify($c){setMyGrade($cg.getGrade())};
+end
+
+
+

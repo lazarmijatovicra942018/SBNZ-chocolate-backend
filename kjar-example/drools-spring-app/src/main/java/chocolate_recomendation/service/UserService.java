@@ -8,6 +8,7 @@ import org.kie.api.runtime.KieContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 
 @Service
@@ -36,7 +37,9 @@ public class UserService {
 
         if (retVal != null) {
             this.repository.setLoggedUser(retVal);
-            return retVal;
+            User retValCopy = new User(retVal);
+            retVal.Loging();
+            return retValCopy;
         }
         else if (users.stream().filter(u->u.getEmail().trim().equals(user.getEmail().trim())).findFirst().orElse(null) != null) {
             return "\"" + " Password is incorect !" + "\"";
@@ -63,6 +66,49 @@ public class UserService {
             return "\"" + " Email you entered already exist !" + "\"";
         }
     }
+
+
+    public List<String> getAllFavouriteIngredients(){
+
+        return repository.getLoggedUser().getFavouriteIngredients();
+    }
+
+    public void  addFavouriteIngredient(String ingredient){
+
+        repository.getLoggedUser().addFavouriteIngredient(ingredient);
+    }
+
+    public void  removeFavouriteIngredient(String ingredient){
+
+        repository.getLoggedUser().removeFavouriteIngredient(ingredient);
+    }
+
+
+    public void  addDislikedIngredient(String ingredient){
+
+        repository.getLoggedUser().addDislikedIngredient(ingredient);
+    }
+
+    public void  removeDislikedIngredient(String ingredient){
+
+        repository.getLoggedUser().removeDislikedIngredient(ingredient);
+    }
+
+
+
+    public List<String> getAllDislikedIngredients(){
+        return repository.getLoggedUser().getDislikedIngredients();
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 

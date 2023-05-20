@@ -52,6 +52,8 @@ public class UserRepository {
         this.users.add(user4);
         this.users.add(user5);
         this.users.add(user6);
+//OBRISI
+        loggedUser = user2;
 
     }
 
@@ -63,4 +65,35 @@ public class UserRepository {
     public void addUser(User user){
         this.users.add(user);
     }
+
+    public void updateUser(User user){
+        for (User u : this.users) {
+            if(u.getEmail() == user.getEmail()){
+                u = user;
+            }
+        }
+    }
+    public User findUserByEmail(String email){
+        for (User u : this.users) {
+            if(u.getEmail() == email){
+                return u;
+            }
+        }
+        return null;
+    }
+    public void addFavouriteIngredient(String ingredient){
+        loggedUser.addFavouriteIngredient(ingredient);
+    }
+    public void removeFavouriteIngredient(String ingredient){
+        loggedUser.removeFavouriteIngredient(ingredient);
+    }
+
+    public void addDislikedIngredient(String ingredient){
+        loggedUser.addDislikedIngredient(ingredient);
+    }
+
+    public void removeDislikedIngredient(String ingredient){
+        loggedUser.removeDislikedIngredient(ingredient);
+    }
+
 }

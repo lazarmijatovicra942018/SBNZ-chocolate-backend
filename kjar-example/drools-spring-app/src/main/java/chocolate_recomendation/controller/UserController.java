@@ -57,6 +57,49 @@ public class UserController {
         return new ResponseEntity<>(userService.register(user), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/favourite/ingredients",method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<String> findAllFavouriteIngredients() {
+        return userService.getAllFavouriteIngredients();
+
+    }
+
+    @RequestMapping(value = "/disliked/ingredients",method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<String> findAllDislikedIngredients() {
+        return userService.getAllDislikedIngredients();
+
+    }
+
+    @RequestMapping(value = "/add/favourite/{ingredient}", method = RequestMethod.PUT)
+    public ResponseEntity<?> addFavouriteIngredient(@PathVariable String ingredient) {
+        userService.addFavouriteIngredient(ingredient);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    @RequestMapping(value = "/remove/favourite/{ingredient}", method = RequestMethod.PUT)
+    public ResponseEntity<?> removeFavouriteIngredient(@PathVariable String ingredient) {
+        userService.removeFavouriteIngredient(ingredient);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    @RequestMapping(value = "/add/disliked/{ingredient}", method = RequestMethod.PUT)
+    public ResponseEntity<?> addDislikedIngredient(@PathVariable String ingredient) {
+        userService.addDislikedIngredient(ingredient);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    @RequestMapping(value = "/remove/disliked/{ingredient}", method = RequestMethod.PUT)
+    public ResponseEntity<?> removeDislikedIngredient(@PathVariable String ingredient) {
+        userService.removeDislikedIngredient(ingredient);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+
+
+
 
 
 }

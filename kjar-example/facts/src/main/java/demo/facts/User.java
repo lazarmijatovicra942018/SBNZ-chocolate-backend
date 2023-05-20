@@ -4,6 +4,8 @@ import demo.facts.UserRank;
 import demo.facts.UserType;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class User implements Serializable{
 
@@ -11,11 +13,27 @@ public class User implements Serializable{
     private String password;
     private String name;
     private String surname;
+
     private String phoneNum;
 
     private UserType userType;
 
     private UserRank userRank;
+
+
+    private boolean isFirstTimeLogin;
+
+
+    private List<String>  favouriteIngredients = new ArrayList<>();
+
+
+    private List<String> dislikedIngredients = new ArrayList<>();
+
+
+    private List<ChocolateGrade> grading = new ArrayList<>();
+
+
+
 
 
 
@@ -28,9 +46,84 @@ public class User implements Serializable{
         this.phoneNum = phoneNum;
         this.userType = userType;
         this.userRank = userRank;
+        this.isFirstTimeLogin = true;
+
+
+    }
+
+
+    public User(User user) {
+        this.email = user.email;
+        this.password = user.password;
+        this.name = user.name;
+        this.surname = user.surname;
+        this.phoneNum = user.phoneNum;
+        this.userType = user.userType;
+        this.userRank = user.userRank;
+        this.isFirstTimeLogin = user.isFirstTimeLogin;
+        this.favouriteIngredients = user.favouriteIngredients;
+        this.dislikedIngredients = user.dislikedIngredients;
+        this.grading = user.grading;
     }
 
     public User() {
+    }
+
+
+    public void Loging(){
+        isFirstTimeLogin = false;
+    }
+
+
+
+    public boolean isFirstTimeLogin() {
+        return isFirstTimeLogin;
+    }
+
+    public void setFirstTimeLogin(boolean firstTimeLogin) {
+        isFirstTimeLogin = firstTimeLogin;
+    }
+
+    public List<String> getFavouriteIngredients() {
+        return favouriteIngredients;
+    }
+
+
+    public void addFavouriteIngredient(String ingredient) {
+        favouriteIngredients.add(ingredient);
+    }
+
+    public void removeFavouriteIngredient(String ingredient) {
+        favouriteIngredients.remove(ingredient);
+    }
+
+    public void addDislikedIngredient(String ingredient) {
+        dislikedIngredients.add(ingredient);
+    }
+
+    public void removeDislikedIngredient(String ingredient) {
+        dislikedIngredients.remove(ingredient);
+    }
+
+
+    public void setFavouriteIngredients(List<String> favouriteIngredients) {
+        this.favouriteIngredients = favouriteIngredients;
+    }
+
+    public List<String> getDislikedIngredients() {
+        return dislikedIngredients;
+    }
+
+    public void setDislikedIngredients(List<String> dislikedIngredients) {
+        this.dislikedIngredients = dislikedIngredients;
+    }
+
+    public List<ChocolateGrade> getGrading() {
+        return grading;
+    }
+
+    public void setGrading(List<ChocolateGrade> grading) {
+        this.grading = grading;
     }
 
     public String getEmail() {

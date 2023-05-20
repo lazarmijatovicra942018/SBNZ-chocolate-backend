@@ -7,7 +7,7 @@ public class Chocolate implements Serializable {
 
     public String name;
 
-    public List<String> ingrediants;
+    public List<String> ingredients;
 
     public String manufacturer;
 
@@ -16,6 +16,58 @@ public class Chocolate implements Serializable {
     private float discount;
 
     private int ammount;
+
+
+    private double grade;
+
+
+    private int myGrade;
+
+    private double weight;
+
+    private double sugarContent;
+
+    private double nutriScore;
+
+    public int getMyGrade() {
+        return myGrade;
+    }
+
+    public void setMyGrade(int myGrade) {
+        this.myGrade = myGrade;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public double getSugarContent() {
+        return sugarContent;
+    }
+
+    public void setSugarContent(double sugarContent) {
+        this.sugarContent = sugarContent;
+    }
+
+    public double getNutriScore() {
+        return nutriScore;
+    }
+
+    public void setNutriScore(double nutriScore) {
+        this.nutriScore = nutriScore;
+    }
+
+    public double getGrade() {
+        return grade;
+    }
+
+    public void setGrade(double grade) {
+        this.grade = grade;
+    }
 
     public int getAmmount() {
         return ammount;
@@ -41,12 +93,12 @@ public class Chocolate implements Serializable {
         this.name = name;
     }
 
-    public List<String> getIngridiants() {
-        return ingrediants;
+    public List<String> getIngredients() {
+        return ingredients;
     }
 
-    public void setIngridiants(List<String> ingridiants) {
-        this.ingrediants = ingridiants;
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
     }
 
     public String getManufacturer() {
@@ -70,16 +122,16 @@ public class Chocolate implements Serializable {
 
     public Chocolate(String name, List<String> ingridiants, String manufacturer, float price) {
         this.name = name;
-        this.ingrediants = ingridiants;
+        this.ingredients = ingridiants;
         this.manufacturer = manufacturer;
         this.price = price;
         this.discount =0;
-        this.ammount = 0;
+        this.ammount = 0 ;
     }
 
     public Chocolate(String name, List<String> ingrediants, String manufacturer, float price, float discount, int ammount) {
         this.name = name;
-        this.ingrediants = ingrediants;
+        this.ingredients = ingrediants;
         this.manufacturer = manufacturer;
         this.price = price;
         this.discount = discount;
@@ -91,14 +143,31 @@ public class Chocolate implements Serializable {
 
 
     public Chocolate(Chocolate c) {
-        this.name = c.getName();
-        this.ingrediants = c.getIngridiants();
-        this.manufacturer = c.getManufacturer();
-        this.price = c.getPrice();
-        this.discount = c.getDiscount();
-        this.ammount = c.getAmmount();
+        this.name = c.name;
+        this.ingredients = c.ingredients;
+        this.manufacturer = c.manufacturer;
+        this.price = c.price;
+        this.discount = c.discount;
+        this.ammount = c.ammount;
+        this.grade = c.grade;
+        this.myGrade = c.myGrade;
+        this.weight = c.weight;
+        this.sugarContent = c.sugarContent;
+        this.nutriScore = c.nutriScore;
     }
 
+
+    public Chocolate(String name, List<String> ingredients, String manufacturer, float price,double weight, double sugarContent, double nutriScore) {
+        this.name = name;
+        this.ingredients = ingredients;
+        this.manufacturer = manufacturer;
+        this.price = price;
+        this.discount = 0;
+        this.ammount = ammount;
+        this.weight = weight;
+        this.sugarContent = sugarContent;
+        this.nutriScore = nutriScore;
+    }
 }
 
 
