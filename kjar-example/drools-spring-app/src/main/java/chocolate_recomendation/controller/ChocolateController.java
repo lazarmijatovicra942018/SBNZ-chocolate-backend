@@ -5,7 +5,9 @@ import demo.facts.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,11 +29,6 @@ public class ChocolateController {
     }
 
 
-    @RequestMapping(value = "/discount", method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
-    public List<Chocolate> findDiscountChocolate() {
-        return chocolateService.getDiscountedChocolate();
-        //return new ResponseEntity<>("{Hej}", HttpStatus.OK);
-    }
 
 
     @RequestMapping(value = "/discount/{ammount}", method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
@@ -51,5 +48,9 @@ public class ChocolateController {
 
     }
 
+    @RequestMapping(value = "/grade/{chocolateName}/{grade}", method = RequestMethod.POST)
+    public ResponseEntity<?> register(@PathVariable String chocolateName,@PathVariable int grade) {
+        return new ResponseEntity<>(chocolateService.AddOrUpdateChocolateGrade(chocolateName,grade), HttpStatus.OK);
+    }
 
 }

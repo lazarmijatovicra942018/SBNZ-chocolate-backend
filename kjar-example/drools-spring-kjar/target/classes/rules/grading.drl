@@ -24,6 +24,7 @@ then
 end
 
 
+
 rule "Put my grade for chocolate"
     agenda-group "grading"
     when
@@ -35,48 +36,6 @@ rule "Put my grade for chocolate"
         modify($c){setMyGrade($cg.getGrade())};
 end
 
-
-rule "Add or update chocolate grade"
-    agenda-group "addOrUpdateGrade"
-    salience 2
-
-    lock-on-active  true
-    when
-
-        $c: Chocolate()
-
-    /*
-        $u:User($email :email)
-        $cg: ChocolateGrade($chocolateName: chocolateName,userEmail ==  $email)
-        $c: Chocolate(name == $chocolateName)
-*/
-    then
-        System.out.println( myGlobalGrade);
-        //$firstRuleExecuted:insert(new Boolean(true));
-       // modify($c){setMyGrade($cg.getGrade())};
-        myGlobalGrade +=1;
-
-end
-
-
-rule "Add new chocolate grade"
-    agenda-group "addOrUpdateGrade"
-    salience 1
-    lock-on-active
-    when
-        $c: Chocolate()
-
-    /*
-        $u:User($email :email)
-        $cg: ChocolateGrade($chocolateName: chocolateName,userEmail ==  $email)
-        $c: Chocolate(name == $chocolateName)
-*/
-    then
-        // String myGlobalVariable = (String) globalMap.get("myGlobal");
-         //System.out.println("Global variable value: " + myGlobalVariable);
-        System.out.println("22222222222222222222222222222222222");
-    //    modify($c){setMyGrade($cg.getGrade())};
-end
 
 
 

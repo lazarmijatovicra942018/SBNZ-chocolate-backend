@@ -100,16 +100,4 @@ public class UserService {
         return repository.getLoggedUser().getDislikedIngredients();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
 }

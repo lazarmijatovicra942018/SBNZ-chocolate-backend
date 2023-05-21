@@ -35,13 +35,11 @@
         <string>Discount for silver user and spent more than 3000</string>
         <string>Discount for none user and spent more than 1000</string>
         <string>Discount for gold user</string>
-        <string>Add or update chocolate grade</string>
         <string>Discount for 20 and more candies</string>
         <string>Calculate grade for chocolate</string>
         <string>Discount for platinum user</string>
         <string>Discount for 10-19  candies</string>
         <string>Discount for bronze user</string>
-        <string>Add new chocolate grade</string>
         <string>Put my grade for chocolate</string>
         <string>Discount for 5-9  candies</string>
       </set>
