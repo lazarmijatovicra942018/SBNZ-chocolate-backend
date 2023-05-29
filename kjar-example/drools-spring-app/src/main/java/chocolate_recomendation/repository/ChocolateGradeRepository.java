@@ -36,14 +36,25 @@ public class ChocolateGradeRepository {
     public void initChocolateGrade(){
         chocolateGrades = new ArrayList<>();
         ChocolateGrade cg1 = new ChocolateGrade("none@gmail.com","Mars",5);
-        chocolateGrades.add(cg1);
+       // chocolateGrades.add(cg1);
 
-        ChocolateGrade cg2 = new ChocolateGrade("none@gmail.com","Bounty",1);
-        chocolateGrades.add(cg2);
+        ChocolateGrade cg2 = new ChocolateGrade("none@gmail.com","Bounty",5);
+    //    chocolateGrades.add(cg2);
 
 
-        ChocolateGrade cg3 = new ChocolateGrade("gold@gmail.com","Mars",1);
-        chocolateGrades.add(cg3);
+        ChocolateGrade cg3 = new ChocolateGrade("none@gmail.com","Twix",1);
+      //  chocolateGrades.add(cg3);
+
+
+
+        ChocolateGrade cg4 = new ChocolateGrade("silver@gmail.com","Mars",5);
+       // chocolateGrades.add(cg4);
+
+        ChocolateGrade cg5 = new ChocolateGrade("platinum@gmail.com","Mars",5);
+       // chocolateGrades.add(cg5);
+
+        ChocolateGrade cg6 = new ChocolateGrade("none@gmail.com","Kidy sa jagodom",1);
+        //chocolateGrades.add(cg6);
 
     }
 

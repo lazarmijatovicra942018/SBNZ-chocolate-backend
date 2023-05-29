@@ -27,7 +27,19 @@ public class Chocolate implements Serializable {
 
     private double sugarContent;
 
-    private double nutriScore;
+    private int nutriScore;
+
+    private int score;
+
+    private double calories;
+
+    public double getCalories() {
+        return calories;
+    }
+
+    public void setCalories(double calories) {
+        this.calories = calories;
+    }
 
     public int getMyGrade() {
         return myGrade;
@@ -53,11 +65,11 @@ public class Chocolate implements Serializable {
         this.sugarContent = sugarContent;
     }
 
-    public double getNutriScore() {
+    public int getNutriScore() {
         return nutriScore;
     }
 
-    public void setNutriScore(double nutriScore) {
+    public void setNutriScore(int nutriScore) {
         this.nutriScore = nutriScore;
     }
 
@@ -117,6 +129,26 @@ public class Chocolate implements Serializable {
         this.price = price;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+
+    public boolean areIngredientsUnique(Chocolate chocolate){
+
+        if(this == chocolate){
+            return  true;}
+        for(String ingredient : chocolate.ingredients) {
+            if(this.ingredients.contains(ingredient)){return false;}
+        }
+        return true;
+
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public Chocolate() {
     }
 
@@ -127,6 +159,8 @@ public class Chocolate implements Serializable {
         this.price = price;
         this.discount =0;
         this.ammount = 0 ;
+        this.score = 0;
+        this.nutriScore = 0;
     }
 
     public Chocolate(String name, List<String> ingrediants, String manufacturer, float price, float discount, int ammount) {
@@ -136,6 +170,8 @@ public class Chocolate implements Serializable {
         this.price = price;
         this.discount = discount;
         this.ammount = ammount;
+        this.score = 0;
+        this.nutriScore = 0;
     }
 
 
@@ -154,19 +190,44 @@ public class Chocolate implements Serializable {
         this.weight = c.weight;
         this.sugarContent = c.sugarContent;
         this.nutriScore = c.nutriScore;
+        this.score = c.score;
+        this.calories = c.calories;
     }
 
 
-    public Chocolate(String name, List<String> ingredients, String manufacturer, float price,double weight, double sugarContent, double nutriScore) {
+    public Chocolate(String name, List<String> ingredients, String manufacturer, float price,double weight, double sugarContent, int nutriScore) {
         this.name = name;
         this.ingredients = ingredients;
         this.manufacturer = manufacturer;
         this.price = price;
         this.discount = 0;
-        this.ammount = ammount;
+        this.ammount = 0;
         this.weight = weight;
         this.sugarContent = sugarContent;
         this.nutriScore = nutriScore;
+        this.score = 0;
+
+
+
+
+    }
+
+    public Chocolate(String name, List<String> ingredients, String manufacturer, float price,double weight, double sugarContent, int nutriScore, double calories) {
+        this.name = name;
+        this.ingredients = ingredients;
+        this.manufacturer = manufacturer;
+        this.price = price;
+        this.discount = discount;
+        this.ammount = ammount;
+        this.grade = grade;
+        this.myGrade = myGrade;
+        this.weight = weight;
+        this.sugarContent = sugarContent;
+        this.nutriScore = nutriScore;
+        this.score = 0;
+        this.calories = calories;
+        this.discount = 0;
+        this.ammount = 0;
     }
 }
 

@@ -1,10 +1,12 @@
 package chocolate_recomendation.service;
 
 import chocolate_recomendation.repository.ChocolateGradeRepository;
+import chocolate_recomendation.repository.ChocolatePurchaseRepository;
 import chocolate_recomendation.repository.ChocolateRepository;
 import chocolate_recomendation.repository.UserRepository;
 import demo.facts.Chocolate;
 import demo.facts.ChocolateGrade;
+import demo.facts.ChocolatePurchase;
 import demo.facts.User;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
@@ -13,8 +15,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.*;
+
 
 @Service
 public class ChocolateService {
@@ -26,6 +29,9 @@ public class ChocolateService {
     private final UserRepository userRepository = UserRepository.getInstance();
 
     private final ChocolateGradeRepository chocolateGradeRepository = ChocolateGradeRepository.getInstance();
+
+    private final ChocolatePurchaseRepository chocolatePurchaseRepository = ChocolatePurchaseRepository.getInstance();
+
     private final KieContainer kieContainer;
 
     private static Logger log = LoggerFactory.getLogger(ChocolateService.class);
@@ -40,6 +46,54 @@ public class ChocolateService {
     public List<Chocolate> getAll(){
         return repository.getChocolates();
     }
+
+
+    public Chocolate getOneByName(String chocolateName){
+        Chocolate chocolate = repository.getChocolates().stream().filter(c->c.getName().equals(chocolateName)).findFirst().orElse(null);
+        KieSession kieSession = kieContainer.newKieSession();
+        kieSession.insert(chocolate);
+        List<ChocolateGrade> chocolateGrades = chocolateGradeRepository.getChocolateGrades();
+        for(ChocolateGrade cg : chocolateGrades){
+            kieSession.insert(cg);
+        }
+        kieSession.getAgenda().getAgendaGroup("grading").setFocus();
+        kieSession.fireAllRules();
+        kieSession.dispose();
+
+
+        return chocolate;
+    }
+
+
+    public Chocolate getOneByNameWithDiscount(String chocolateName,int amount){
+        Chocolate chocolate = new Chocolate(repository.getChocolates().stream().filter(c->c.getName().equals(chocolateName)).findFirst().orElse(null));
+        chocolate.setAmmount(amount);
+        KieSession kieSession = kieContainer.newKieSession();
+        kieSession.insert(chocolate);
+        List<ChocolateGrade> chocolateGrades = chocolateGradeRepository.getChocolateGrades();
+        for(ChocolateGrade cg : chocolateGrades){
+            kieSession.insert(cg);
+        }
+
+        User loggedUser = userRepository.getLoggedUser();
+
+        kieSession.insert(userRepository.getLoggedUser());
+        kieSession.getAgenda().getAgendaGroup("discount").setFocus();
+        kieSession.fireAllRules();
+
+        kieSession.getAgenda().getAgendaGroup("grading").setFocus();
+        kieSession.fireAllRules();
+        kieSession.getAgenda().getAgendaGroup("my-grading").setFocus();
+        kieSession.fireAllRules();
+        kieSession.dispose();
+
+
+        return chocolate;
+    }
+
+
+
+
 
     public List<String> getAllIngredients(){
         return repository.getIngredients();
@@ -71,21 +125,82 @@ public class ChocolateService {
         }
 
 
+        List<ChocolatePurchase> chocolatePurchase = chocolatePurchaseRepository.getChocolatePurchases();
+
+        for(ChocolatePurchase cp : chocolatePurchase){
+            kieSession.insert(cp);
+        }
+
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.add(Calendar.MONTH, -6);
+
+
+        Date sixMonthsAgo = calendar.getTime();
+
+        kieSession.setGlobal("sixMonthsAgo", sixMonthsAgo);
+
+        User loggedUser = userRepository.getLoggedUser();
+
         kieSession.insert(userRepository.getLoggedUser());
         kieSession.getAgenda().getAgendaGroup("discount").setFocus();
         kieSession.fireAllRules();
 
         kieSession.getAgenda().getAgendaGroup("grading").setFocus();
         kieSession.fireAllRules();
+        kieSession.getAgenda().getAgendaGroup("my-grading").setFocus();
+        kieSession.fireAllRules();
 
+        kieSession.getAgenda().getAgendaGroup("recommend-registered").setFocus();
+        kieSession.fireAllRules();
 
         kieSession.dispose();
+        chocolates.sort(Comparator.comparing(Chocolate::getScore).reversed());
         return chocolates;
 
     }
 
 
-    public Object AddOrUpdateChocolateGrade(String chocolateName , int grade){
+    public List<Chocolate> getChocolatesForUnregisteredUsers(){
+
+        KieSession kieSession = kieContainer.newKieSession();
+        List<Chocolate> original = repository.getChocolates();
+        List<Chocolate> chocolates = new ArrayList<>();
+
+        for(Chocolate c : original){
+            Chocolate cl = new Chocolate(c);
+            chocolates.add(cl);
+            kieSession.insert(cl);
+        }
+
+        List<ChocolateGrade> chocolateGrades = chocolateGradeRepository.getChocolateGrades();
+
+        for(ChocolateGrade cg : chocolateGrades){
+            kieSession.insert(cg);
+        }
+
+
+        List<ChocolatePurchase> chocolatePurchase = chocolatePurchaseRepository.getChocolatePurchases();
+
+        for(ChocolatePurchase cp : chocolatePurchase){
+            kieSession.insert(cp);
+        }
+        kieSession.getAgenda().getAgendaGroup("grading").setFocus();
+        kieSession.fireAllRules();
+
+        kieSession.getAgenda().getAgendaGroup("recommend-unrecognised").setFocus();
+        kieSession.fireAllRules();
+        kieSession.dispose();
+
+        chocolates.sort(Comparator.comparing(Chocolate::getScore).reversed());
+
+        if(chocolates.size()<10){return chocolates;}
+        return chocolates.subList(0,10);
+
+    }
+
+
+    public Object addOrUpdateChocolateGrade(String chocolateName , int grade){
         ChocolateGrade chocolateGrade = new ChocolateGrade( userRepository.getLoggedUser().getEmail(), chocolateName ,grade);
         List<ChocolateGrade> chocolateGrades = chocolateGradeRepository.getChocolateGrades();
         ChocolateGrade cg =  chocolateGrades.stream().filter(c->c.getGradeId().equals(chocolateGrade.getGradeId())).findFirst().orElse(null);
@@ -97,4 +212,16 @@ public class ChocolateService {
             return cg;
         }
     }
+
+
+    public Object addChocolatePurchase(String chocolateName , int amount){
+        ChocolatePurchase chocolatePurchase= new ChocolatePurchase(userRepository.getLoggedUser().getEmail(), chocolateName , amount);
+        return chocolatePurchaseRepository.addChocolatePurchase(chocolatePurchase);
+    }
+
+
+    public List<ChocolatePurchase> getChocolatePurchases(){
+        return chocolatePurchaseRepository.getChocolatePurchases();
+    }
+
 }

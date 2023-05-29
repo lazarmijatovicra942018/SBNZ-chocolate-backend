@@ -1,6 +1,7 @@
 package chocolate_recomendation.controller;
 import chocolate_recomendation.service.ChocolateService;
 import demo.facts.Chocolate;
+import demo.facts.ChocolatePurchase;
 import demo.facts.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,9 +32,9 @@ public class ChocolateController {
 
 
 
-    @RequestMapping(value = "/discount/{ammount}", method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
-    public List<Chocolate> findDiscountChocolateWithAmmount(@PathVariable int ammount) {
-        return chocolateService.getDiscountedChocolateWithAmmount(ammount);
+    @RequestMapping(value = "/discount/{amount}", method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<Chocolate> findDiscountChocolateWithAmount(@PathVariable int amount) {
+        return chocolateService.getDiscountedChocolateWithAmmount(amount);
     }
 
 
@@ -41,6 +42,26 @@ public class ChocolateController {
     public List<Chocolate> findAll() {
         return chocolateService.getAll();
     }
+
+
+    @RequestMapping(value = "/purchases", method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<ChocolatePurchase> findAllPurchases() {
+        return chocolateService.getChocolatePurchases();
+    }
+
+
+    @RequestMapping(value = "/find/{chocolateName}", method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
+    public Chocolate findOneByName(@PathVariable String chocolateName) {
+
+        return chocolateService.getOneByName(chocolateName);
+    }
+
+    @RequestMapping(value = "/find/{chocolateName}/{amount}", method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
+    public Chocolate findOneByNameWithAmount(@PathVariable String chocolateName , @PathVariable int amount) {
+
+        return chocolateService.getOneByNameWithDiscount(chocolateName,amount);
+    }
+
 
     @RequestMapping(value = "/ingredients",method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
     public List<String> findAllIngredients() {
@@ -50,7 +71,23 @@ public class ChocolateController {
 
     @RequestMapping(value = "/grade/{chocolateName}/{grade}", method = RequestMethod.POST)
     public ResponseEntity<?> register(@PathVariable String chocolateName,@PathVariable int grade) {
-        return new ResponseEntity<>(chocolateService.AddOrUpdateChocolateGrade(chocolateName,grade), HttpStatus.OK);
+        return new ResponseEntity<>(chocolateService.addOrUpdateChocolateGrade(chocolateName,grade), HttpStatus.OK);
     }
+
+
+
+    @RequestMapping(value = "/purchase/{chocolateName}/{amount}", method = RequestMethod.POST)
+    public ResponseEntity<?> addChocolatePurchase(@PathVariable String chocolateName,@PathVariable int amount) {
+        return new ResponseEntity<>(chocolateService.addChocolatePurchase(chocolateName,amount), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/unregistered", method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<Chocolate> getChocolatesForUnregisteredUsers() {
+        return chocolateService.getChocolatesForUnregisteredUsers();
+    }
+
+
+
+
 
 }

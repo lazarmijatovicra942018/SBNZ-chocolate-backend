@@ -42,7 +42,7 @@ public class UserService {
             return retValCopy;
         }
         else if (users.stream().filter(u->u.getEmail().trim().equals(user.getEmail().trim())).findFirst().orElse(null) != null) {
-            return "\"" + " Password is incorect !" + "\"";
+            return "\"" + " Password is incorrect !" + "\"";
         }
         else {
             return "\"" + " Email you entered does not exist !" + "\"";

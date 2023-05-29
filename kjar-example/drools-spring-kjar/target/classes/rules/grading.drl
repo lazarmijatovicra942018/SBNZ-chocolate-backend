@@ -6,8 +6,6 @@ import java.util.List
 import demo.facts.ChocolateGrade;
 import java.util.ArrayList;
 
-global Integer myGlobalGrade;
-
 
 
 rule "Calculate grade for chocolate"
@@ -26,7 +24,7 @@ end
 
 
 rule "Put my grade for chocolate"
-    agenda-group "grading"
+    agenda-group "my-grading"
     when
         $u:User($email :email)
         $cg: ChocolateGrade($chocolateName: chocolateName,userEmail ==  $email)

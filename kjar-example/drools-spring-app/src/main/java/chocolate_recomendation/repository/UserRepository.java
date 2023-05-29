@@ -53,7 +53,7 @@ public class UserRepository {
         this.users.add(user5);
         this.users.add(user6);
 //OBRISI
-        loggedUser = user2;
+   //     loggedUser = user2;
 
     }
 

@@ -1,0 +1,202 @@
+package rules;
+import demo.facts.Item;
+import demo.facts.Chocolate;
+import demo.facts.User;
+import java.util.List
+import demo.facts.ChocolateGrade;
+import demo.facts.ChocolatePurchase;
+import java.util.ArrayList;
+
+import java.util.Date;
+
+global Date sixMonthsAgo;
+
+
+
+rule "Set Score to -1000 if the chocolate has bad grade from that user."
+    agenda-group "recommend-registered"
+    lock-on-active true
+when
+    $u:User($email: email)
+    $c: Chocolate($name: name )
+    $chocolateGrade: ChocolateGrade(chocolateName  == $name , userEmail == $email  , grade<3)
+
+    then
+        modify($c){setScore(-1000)};
+end
+
+
+
+rule "Subtract score by 500 if chocolate has disliked ingredients."
+    agenda-group "recommend-registered"
+    lock-on-active true
+when
+    $u:User($dislikedIngredients: dislikedIngredients)
+    $chocolate: Chocolate($ingredients: ingredients)
+
+    Number(intValue > 0) from accumulate(
+                    $s: String(
+                         $s memberOf($ingredients)
+                    ) from $dislikedIngredients ,
+                        init(int count = 0;),
+                        action(count += 1;),
+                        reverse(count -= 1;),
+                        result(count)
+                   )
+
+    then
+          modify($chocolate){setScore($chocolate.getScore()-500)};
+
+end
+
+
+
+rule "Add 150  to score if chocolate contains favourite ingredients"
+    agenda-group "recommend-registered"
+    lock-on-active true
+when
+    $u:User($favouriteIngredients: favouriteIngredients)
+    $chocolate: Chocolate($ingredients: ingredients)
+
+    Number(intValue > 0) from accumulate(
+                    $s: String(
+                         $s memberOf($ingredients)
+                    ) from $favouriteIngredients ,
+                        init(int count = 0;),
+                        action(count += 1;),
+                        reverse(count -= 1;),
+                        result(count)
+                   )
+
+    then
+        modify($chocolate){setScore($chocolate.getScore()+150)};
+
+end
+
+
+
+rule "Add 60  to score if chocolate is of favourite manufacturer(3 or more purchases of manufacturer and no bad grade for that manufacturer)"
+    agenda-group "recommend-registered"
+    lock-on-active true
+when
+    $u:User($email: email,$favouriteIngredients: favouriteIngredients)
+    $c: Chocolate($manufacturer: manufacturer )
+    $chocolates: List(size>=3) from accumulate(
+                                $chocolate: Chocolate(manufacturer == $manufacturer),
+                                collectList($chocolate.getName())
+                     )
+    $chocolatePurchases: List(size>=3) from accumulate(
+                                $chocolatePurchase: ChocolatePurchase(userEmail == $email,chocolateName memberOf $chocolates),
+                                collectList($chocolatePurchase.getChocolateName())
+                     )
+
+    $ChocolateGrade: List(size == 0) from accumulate(
+                                $chocolateGrade: ChocolateGrade(userEmail == $email,chocolateName  memberOf $chocolates , grade<=2),
+                                collectList($chocolateGrade.getChocolateName())
+                     )
+
+    then
+        modify($c){setScore($c.getScore()+60)};
+
+end
+
+
+
+rule "Add 15  to score if chocolate  has better nutriScore than average nutriScore."
+    agenda-group "recommend-registered"
+    lock-on-active true
+when
+    $avg: Number() from accumulate(
+                Chocolate($ns: nutriScore ,  nutriScore != 0),
+                average($ns)
+            )
+    $c: Chocolate($avg.doubleValue() < nutriScore)
+
+    then
+        modify($c){setScore($c.getScore()+15)};
+
+end
+
+
+
+rule "Add 100  to score if chocolate  has better  better users grade than average grade by that user or it is highest grade ."
+    agenda-group "recommend-registered"
+    lock-on-active true
+when
+    $u:User($email: email)
+    $avg: Number() from accumulate(
+                ChocolateGrade(userEmail ==$email, $grade : grade),
+                average($grade)
+            )
+    $c: Chocolate( myGrade> $avg.doubleValue() || myGrade == 5 )
+
+    then
+       modify($c){setScore($c.getScore()+100)};
+
+end
+
+
+
+
+
+rule "Add 90  to score if chocolate is  is new(it has no grade or purchase)"
+    agenda-group "recommend-registered"
+    lock-on-active true
+when
+    $c: Chocolate($name: name )
+    $chocolatePurchases: List(size == 0) from accumulate(
+                                $chocolatePurchase: ChocolatePurchase($name == chocolateName),
+                                collectList($chocolatePurchase)
+                     )
+
+    $ChocolateGrade: List(size == 0) from accumulate(
+                                $chocolateGrade: ChocolateGrade(chocolateName == $name),
+                                collectList($chocolateGrade)
+                     )
+
+    then
+        modify($c){setScore($c.getScore()+90)};
+
+end
+
+
+
+rule "Add 80  to score if chocolate has good average  grade or no grades but it has not been sold in past six months."
+    agenda-group "recommend-registered"
+    lock-on-active true
+when
+    $c: Chocolate($name: name , grade>3 ||  grade == 0)
+
+    $chocolatePurchases: List(size == 0) from accumulate(
+                                $chocolatePurchase: ChocolatePurchase($name == chocolateName , dateOfPurchase > sixMonthsAgo ),
+                                collectList($chocolatePurchase)
+                     )
+
+    then
+        modify($c){setScore($c.getScore()+80)};
+end
+
+
+
+rule "Add 10  to score if chocolate  price/weight is cheaper than average price/weight."
+    agenda-group "recommend-registered"
+    lock-on-active true
+when
+    $avg: Number() from accumulate(
+                Chocolate($wp: (price/weight) ,  weight != 0,   price != 0),
+                average($wp)
+            )
+    $c: Chocolate($avg > (price/weight) ,  weight != 0,   price != 0 )
+
+    then
+        modify($c){setScore($c.getScore()+10)};
+
+end
+
+
+
+
+
+
+
+

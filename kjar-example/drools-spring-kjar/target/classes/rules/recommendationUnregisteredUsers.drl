@@ -1,0 +1,202 @@
+package rules;
+import demo.facts.Item;
+import demo.facts.Chocolate;
+import demo.facts.User;
+import java.util.List
+import demo.facts.ChocolateGrade;
+import demo.facts.ChocolatePurchase;
+import java.util.ArrayList;
+
+
+
+rule "Put the score to -500 of chocolate with tree or more grades less than three and average grade less or equal to two if there are 15 or more chocolates with no average grade or average grade grater than two"
+    agenda-group "recommend-unrecognised"
+    salience 100
+    lock-on-active true
+    when
+
+        $chocolates: List(size > 14) from accumulate(
+                    $chocolate: Chocolate(grade > 2 || grade ==0),
+                    collectList($chocolate)
+                )
+        $c: Chocolate(grade<=2)
+        $chocolateGrades: List(size > 2) from accumulate(
+                            $chocolateGrade: ChocolateGrade(chocolateName == $c.getName(), grade<=2),
+                            collectList($chocolateGrade)
+                        )
+
+    then
+        modify($c){setScore(-500)};
+        delete($c)
+end
+
+
+rule "Subtract 200 if chocolate has bad  average grade and 3 or more bad grades"
+    agenda-group "recommend-unrecognised"
+    salience 100
+    lock-on-active true
+    when
+        $c: Chocolate(grade<=2)
+        $chocolateGrades: List(size > 2) from accumulate(
+                            $chocolateGrade: ChocolateGrade(chocolateName == $c.getName(), grade<=2),
+                            collectList($chocolateGrade)
+                        )
+
+    then
+        modify($c){setScore($c.getScore()-200)};
+
+end
+
+
+
+rule "Subtract 70 if chocolate has bad  average grade"
+    agenda-group "recommend-unrecognised"
+    salience 100
+    lock-on-active true
+    when
+        $c: Chocolate(grade<=2 , grade >0)
+
+
+    then
+        modify($c){setScore($c.getScore()-70)};
+
+end
+
+
+
+rule "Add 150  to score if there are 3 or more good grades(4 or five) and average grade is a good grade"
+    agenda-group "recommend-unrecognised"
+    lock-on-active true
+    when
+
+        $c: Chocolate(grade>=4)
+        $chocolateGrades: List(size > 2) from accumulate(
+                            $chocolateGrade: ChocolateGrade(chocolateName == $c.getName(), grade>=4),
+                            collectList($chocolateGrade)
+                        )
+
+    then
+        modify($c){setScore($c.getScore()+150)};
+
+end
+
+
+
+rule "Add 100  if chocolate is in more than 7 purchases and has 50 or more bars of chocolate sold"
+    agenda-group "recommend-unrecognised"
+    lock-on-active true
+    when
+
+        $c: Chocolate()
+        $chocolatePurchases: List(size > 7) from accumulate(
+                            $chocolatePurchase: ChocolatePurchase(chocolateName == $c.getName()),
+                            collectList($chocolatePurchase)
+                        )
+         Number(intValue >= 50) from accumulate(
+                    ChocolatePurchase(
+                        chocolateName == $c.getName(),
+                        $a: ammount
+                    ),
+                    init(int count = 0;),
+                    action(count += $a;),
+                    reverse(count -= $a;),
+                    result(count)
+                )
+    then
+        modify($c){setScore($c.getScore()+100)};
+
+end
+
+
+rule "Add 20  if chocolate has 10% less  sugar then average % of sugar in all chocolates"
+    agenda-group "recommend-unrecognised"
+    lock-on-active true
+    when
+
+        accumulate(
+                    Chocolate($sw: (sugarContent/weight),  weight!= 0),
+                    $avg: average($sw)
+                  )
+        $c: Chocolate((sugarContent/weight)<= ($avg*0.90),  weight!= 0)
+    then
+        modify($c){setScore($c.getScore()+20)};
+end
+
+
+
+rule "Add 50 if all ingredients from chocolate are unique"
+    agenda-group "recommend-unrecognised"
+    lock-on-active true
+    when
+        $c: Chocolate()
+        $list: List(size == 0) from accumulate(
+                                    $chocolate: Chocolate(!areIngredientsUnique($c)),
+                                    collectList($chocolate)
+                         )
+    then
+
+        modify($c){setScore($c.getScore()+50)};
+
+
+end
+
+
+
+
+
+
+
+rule "Subtract 100 if there is a chocolate with three or more same ingredients with higher or equal score"
+agenda-group "recommend-unrecognised"
+lock-on-active true
+when
+    $chocolate1: Chocolate($ingredients1: ingredients)
+
+    $chocolate2: Chocolate(this != $chocolate1, $ingredients2: ingredients , score >= $chocolate1.getScore())
+
+    Number(intValue > 2) from accumulate(
+                    $s: String(
+                         $s memberOf($ingredients2)
+                    ) from $ingredients1 ,
+                        init(int count = 0;),
+                        action(count += 1;),
+                        reverse(count -= 1;),
+                        result(count)
+                   )
+then
+    modify($chocolate1){setScore($chocolate1.getScore()-100)};
+
+end
+
+
+
+
+
+
+
+rule "Subtract 50 if there is a chocolate of same manufacturer with similar score "
+    agenda-group "recommend-unrecognised"
+    salience -10
+    when
+        $c: Chocolate($manufacturer: manufacturer , $s: score)
+        $chocolates: List(size>1) from accumulate(
+                            $chocolate: Chocolate(manufacturer == $manufacturer , $s <= score , (score-20) <= $s ),
+                            collectList($chocolate)
+                 )
+    then
+        modify($c){setScore($c.getScore()-50)};
+        System.out.println($c.getName());
+end
+
+
+
+
+
+
+
+
+
+
+
+
+

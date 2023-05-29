@@ -6,6 +6,7 @@ import demo.facts.UserRank;
 
 rule "Discount for 5-9  candies"
     agenda-group "discount"
+    lock-on-active true
     when
         $c: Chocolate(ammount>4 , ammount< 10 )
     then
@@ -14,6 +15,7 @@ end
 
 rule "Discount for 10-19  candies"
     agenda-group "discount"
+    lock-on-active true
     when
         $c: Chocolate(ammount>9 , ammount< 20)
     then
@@ -23,6 +25,7 @@ end
 
 rule "Discount for 20 and more candies"
     agenda-group "discount"
+    lock-on-active true
     when
         $c: Chocolate( 19<ammount )
     then
@@ -33,6 +36,7 @@ end
 
 rule "Discount for bronze user"
     agenda-group "discount"
+    lock-on-active true
     when
         $c: Chocolate()
         $u:User(userRank == UserRank.BRONZE)
@@ -44,6 +48,7 @@ end
 
 rule "Discount for silver user"
     agenda-group "discount"
+    lock-on-active true
     when
         $c: Chocolate()
         $u:User(userRank == UserRank.SILVER)
@@ -55,6 +60,7 @@ end
 
 rule "Discount for gold user"
     agenda-group "discount"
+    lock-on-active true
     when
         $c: Chocolate()
         $u:User(userRank == UserRank.GOLD)
@@ -66,6 +72,7 @@ end
 
 rule "Discount for platinum user"
     agenda-group "discount"
+    lock-on-active true
     when
         $c: Chocolate()
         $u:User(userRank == UserRank.PLATINUM)
@@ -79,6 +86,7 @@ end
 
 rule "Discount for none user and spent more than 1000"
     agenda-group "discount"
+    lock-on-active true
     when
         $c: Chocolate((price*ammount)>1000.0)
         $u:User(userRank == UserRank.NONE)
@@ -90,6 +98,7 @@ end
 
 rule "Discount for bronze user and spent more than 2000"
     agenda-group "discount"
+    lock-on-active true
     when
         $c: Chocolate((price*ammount) > 2000.0)
         $u:User(userRank == UserRank.BRONZE)
@@ -101,6 +110,7 @@ end
 
 rule "Discount for silver user and spent more than 3000"
     agenda-group "discount"
+    lock-on-active true
     when
         $c: Chocolate((price*ammount)> 3000.0)
         $u:User(userRank == UserRank.SILVER)
@@ -112,6 +122,7 @@ end
 
 rule "Discount for gold user and spent more than 4000"
     agenda-group "discount"
+    lock-on-active true
     when
         $c: Chocolate((price*ammount) > 4000.0)
         $u:User(userRank == UserRank.GOLD)
