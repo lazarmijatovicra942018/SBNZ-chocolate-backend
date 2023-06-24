@@ -1,0 +1,25 @@
+
+template header
+
+  id
+  chocolateName
+  discount
+
+  package rules;
+
+  import demo.facts.*;
+
+
+  template "general-rule-template"
+
+
+  rule "@{id}-@{chocolateName}-@{discount}"
+      agenda-group "discount"
+      when
+            $c: Chocolate(name == "@{chocolateName}")
+      then
+            modify($c){setDiscount($c.getDiscount()+@{discount})};
+  end
+
+
+  end template

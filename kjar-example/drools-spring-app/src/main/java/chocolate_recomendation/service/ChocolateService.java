@@ -1,13 +1,10 @@
 package chocolate_recomendation.service;
 
-import chocolate_recomendation.repository.ChocolateGradeRepository;
-import chocolate_recomendation.repository.ChocolatePurchaseRepository;
-import chocolate_recomendation.repository.ChocolateRepository;
-import chocolate_recomendation.repository.UserRepository;
-import demo.facts.Chocolate;
-import demo.facts.ChocolateGrade;
-import demo.facts.ChocolatePurchase;
-import demo.facts.User;
+import chocolate_recomendation.repository.*;
+import chocolate_recomendation.utils.MavenUtils;
+import demo.facts.*;
+import org.apache.maven.shared.invoker.MavenInvocationException;
+import org.drools.template.ObjectDataCompiler;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.slf4j.Logger;
@@ -15,6 +12,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -25,6 +26,10 @@ public class ChocolateService {
 
     private final ChocolateRepository repository = ChocolateRepository.getInstance();
 
+    private final StorageRepository storageRepository = new StorageRepository();
+
+
+    private final ObjectDataCompiler objectDataCompiler;
 
     private final UserRepository userRepository = UserRepository.getInstance();
 
@@ -40,10 +45,11 @@ public class ChocolateService {
     @Autowired
     public ChocolateService(KieContainer kieContainer) {
         this.kieContainer = kieContainer;
-
+        this.objectDataCompiler = new ObjectDataCompiler();
     }
 
     public List<Chocolate> getAll(){
+
         return repository.getChocolates();
     }
 
@@ -223,5 +229,43 @@ public class ChocolateService {
     public List<ChocolatePurchase> getChocolatePurchases(){
         return chocolatePurchaseRepository.getChocolatePurchases();
     }
+
+    public Rule addChocolateDiscountRule(String chocolateName ,int discount) throws MavenInvocationException {
+        Rule rule = new Rule(chocolateName,discount);
+
+        this.storageRepository.save(rule.getId(), this.getRuleTemplate(rule));
+
+
+        MavenUtils.mavenCleanAndInstallRules();
+
+        return rule;
+
+
+
+    }
+
+    public String getRuleTemplate(Rule r){
+        String filePath = "..\\kjar-example\\drools-spring-kjar\\src\\main\\resources\\rules\\templates\\GeneralTemplate.drt";
+        String rule = "";
+        InputStream inputStream;
+        try {
+            // Create a FileInputStream to read the file
+            File file = new File(filePath);
+            inputStream = new FileInputStream(file);
+            List<Rule> data = new ArrayList<>();
+            data.add(r);
+            rule =   this.objectDataCompiler.compile(data,inputStream);
+
+             inputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return rule;
+
+    }
+
 
 }

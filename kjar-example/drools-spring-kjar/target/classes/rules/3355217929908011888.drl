@@ -1,0 +1,12 @@
+  package rules;
+  import demo.facts.*;
+
+  rule "3355217929908011888-mars-2000"
+      agenda-group "discount"
+      when
+            $c: Chocolate(name == "mars")
+      then
+            modify($c){setDiscount($c.getDiscount()+2000)};
+  end
+
+

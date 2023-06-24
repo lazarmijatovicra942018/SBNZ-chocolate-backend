@@ -2,7 +2,7 @@ package chocolate_recomendation.controller;
 import chocolate_recomendation.service.ChocolateService;
 import demo.facts.Chocolate;
 import demo.facts.ChocolatePurchase;
-import demo.facts.User;
+import org.apache.maven.shared.invoker.MavenInvocationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +86,11 @@ public class ChocolateController {
         return chocolateService.getChocolatesForUnregisteredUsers();
     }
 
+    @RequestMapping(value = "/rule/{chocolateName}/{discount}", method = RequestMethod.POST)
+    public ResponseEntity<?> addDiscountRule(@PathVariable String chocolateName,@PathVariable int discount) throws MavenInvocationException {
+
+        return new ResponseEntity<>(chocolateService.addChocolateDiscountRule(chocolateName,discount), HttpStatus.OK);
+    }
 
 
 
