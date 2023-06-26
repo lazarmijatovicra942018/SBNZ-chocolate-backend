@@ -1,10 +1,16 @@
 package demo.facts;
 
+import org.kie.api.definition.type.Position;
+
 import java.io.Serializable;
 import java.util.List;
 
+
+
 public class Chocolate implements Serializable {
 
+
+    @Position(0)
     public String name;
 
     public List<String> ingredients;

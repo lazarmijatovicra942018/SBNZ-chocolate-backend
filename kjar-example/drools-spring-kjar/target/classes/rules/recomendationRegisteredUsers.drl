@@ -161,6 +161,7 @@ end
 
 
 
+
 rule "Add 80  to score if chocolate has good average  grade or no grades but it has not been sold in past six months."
     agenda-group "recommend-registered"
     lock-on-active true
@@ -200,3 +201,23 @@ end
 
 
 
+
+query differentChocolateWithSameIngredient(List $ingredients , String $name)
+        $i: String() from $ingredients
+        exists(Chocolate(name != $name , $i memberOf(ingredients)))
+end
+
+
+query uniqueChocolate(List $ingredients , String $name)
+        not(exists(differentChocolateWithSameIngredient($ingredients ,$name ;)))
+end
+
+rule "Add 50 to score if all ingredients from chocolate are unique "
+    agenda-group "recommend-registered"
+    lock-on-active true
+    when
+        $c: Chocolate( $name : name , $ingredients : ingredients)
+        uniqueChocolate($ingredients ,$name ;)
+    then
+        modify($c){setScore($c.getScore()+50)};
+end

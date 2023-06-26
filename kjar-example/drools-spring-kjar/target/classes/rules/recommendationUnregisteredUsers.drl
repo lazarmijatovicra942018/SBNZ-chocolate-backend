@@ -124,21 +124,6 @@ end
 
 
 
-rule "Add 50 if all ingredients from chocolate are unique"
-    agenda-group "recommend-unrecognised"
-    lock-on-active true
-    when
-        $c: Chocolate()
-        $list: List(size == 0) from accumulate(
-                                    $chocolate: Chocolate(!areIngredientsUnique($c)),
-                                    collectList($chocolate)
-                         )
-    then
-
-        modify($c){setScore($c.getScore()+50)};
-
-
-end
 
 
 
@@ -191,6 +176,24 @@ end
 
 
 
+
+
+
+rule "Add 50 if all ingredients from chocolate are unique"
+    agenda-group "recommend-unrecognised"
+    lock-on-active true
+    when
+        $c: Chocolate()
+        $list: List(size == 0) from accumulate(
+                                    $chocolate: Chocolate(!areIngredientsUnique($c)),
+                                    collectList($chocolate)
+                         )
+    then
+
+        modify($c){setScore($c.getScore()+50)};
+
+
+end
 
 
 

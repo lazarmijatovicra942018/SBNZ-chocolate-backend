@@ -13,7 +13,9 @@ public class ChocolateRepository {
     public static List<Chocolate> chocolates;
 
     public ChocolateRepository() {
+        chocolates =  new ArrayList<>();
         this.initChocolates();
+
     }
 
     public static List<String> getIngredients() {
@@ -181,8 +183,10 @@ public class ChocolateRepository {
 
 
         List<String> ingredients16= new ArrayList<>();
-        ingredients16.add(ingredients.get(2));
+
         ingredients16.add(ingredients.get(10));
+
+        ingredients16.add(ingredients.get(2));
 
         Chocolate c16 = new Chocolate("Kinder mlecna cokolada", ingredients16,"Kinder" , 160,100,60,4, 586);
         chocolates.add(c16);

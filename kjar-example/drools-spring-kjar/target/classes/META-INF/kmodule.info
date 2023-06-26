@@ -45,25 +45,24 @@
     <entry>
       <string>rules</string>
       <set>
+        <string>Add 50 to score if all ingredients from chocolate are unique </string>
         <string>Discount for silver user</string>
-        <string>Add 150  to score if chocolate contains favourite ingredients</string>
         <string>Discount for gold user and spent more than 4000</string>
+        <string>Add 150  to score if chocolate contains favourite ingredients</string>
         <string>Add 15  to score if chocolate  has better nutriScore than average nutriScore.</string>
         <string>Add 10  to score if chocolate  price/weight is cheaper than average price/weight.</string>
-        <string>3355217929908011888-mars-2000</string>
         <string>Discount for gold user</string>
-        <string>-7156579574461406213-mars-2000</string>
-        <string>567191691821624448-Mars-500</string>
         <string>Set Score to -1000 if the chocolate has bad grade from that user.</string>
         <string>Subtract 70 if chocolate has bad  average grade</string>
+        <string>differentChocolateWithSameIngredient</string>
+        <string>uniqueChocolate</string>
         <string>Add 150  to score if there are 3 or more good grades(4 or five) and average grade is a good grade</string>
-        <string>104898842250398133-Mars-2000</string>
         <string>Discount for 5-9  candies</string>
         <string>Add 60  to score if chocolate is of favourite manufacturer(3 or more purchases of manufacturer and no bad grade for that manufacturer)</string>
-        <string>Subtract 200 if chocolate has bad  average grade and 3 or more bad grades</string>
         <string>Discount for bronze user and spent more than 2000</string>
-        <string>Add 50 if all ingredients from chocolate are unique</string>
+        <string>Subtract 200 if chocolate has bad  average grade and 3 or more bad grades</string>
         <string>Discount for silver user and spent more than 3000</string>
+        <string>Add 50 if all ingredients from chocolate are unique</string>
         <string>Subtract 100 if there is a chocolate with three or more same ingredients with higher or equal score</string>
         <string>Add 100  to score if chocolate  has better  better users grade than average grade by that user or it is highest grade .</string>
         <string>Add 20  if chocolate has 10% less  sugar then average % of sugar in all chocolates</string>
@@ -73,14 +72,12 @@
         <string>Add 90  to score if chocolate is  is new(it has no grade or purchase)</string>
         <string>Subtract score by 500 if chocolate has disliked ingredients.</string>
         <string>Discount for 20 and more candies</string>
-        <string>Add 100  if chocolate is in more than 7 purchases and has 50 or more bars of chocolate sold</string>
         <string>Calculate grade for chocolate</string>
+        <string>Add 100  if chocolate is in more than 7 purchases and has 50 or more bars of chocolate sold</string>
         <string>Discount for platinum user</string>
-        <string>-2934282638262381842-mars-10</string>
         <string>Discount for 10-19  candies</string>
         <string>Add 80  to score if chocolate has good average  grade or no grades but it has not been sold in past six months.</string>
         <string>Discount for bronze user</string>
-        <string>-5795727377130234028-mars-10</string>
         <string>Put my grade for chocolate</string>
       </set>
     </entry>
