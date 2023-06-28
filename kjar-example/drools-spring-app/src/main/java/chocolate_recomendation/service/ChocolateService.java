@@ -265,7 +265,9 @@ public class ChocolateService {
 
 
     public Object addChocolatePurchase(String chocolateName , int amount){
-        ChocolatePurchase chocolatePurchase= new ChocolatePurchase(userRepository.getLoggedUser().getEmail(), chocolateName , amount);
+        Chocolate chocolate = repository.getChocolates().stream().filter(c->c.getName().equals(chocolateName)).findFirst().orElse(null);
+        ChocolatePurchase chocolatePurchase= new ChocolatePurchase(userRepository.getLoggedUser().getEmail(), chocolateName , amount, chocolate.getPrice());
+        this.CepCategoryRules();
         return chocolatePurchaseRepository.addChocolatePurchase(chocolatePurchase);
     }
 
@@ -332,4 +334,28 @@ public class ChocolateService {
         kieSession.fireAllRules();
 
     }
+
+
+    public void  CepCategoryRules(){
+        KieSession kieSession = GetKieSession();
+
+
+        List<ChocolatePurchase> chocolatePurchase = chocolatePurchaseRepository.getChocolatePurchases();
+
+        for(ChocolatePurchase cp : chocolatePurchase){
+            kieSession.insert(cp);
+        }
+
+        User loggedUser = userRepository.getLoggedUser();
+
+        kieSession.insert(loggedUser);
+
+
+        kieSession.getAgenda().getAgendaGroup("cep-category").setFocus();
+        kieSession.fireAllRules();
+
+    }
+
+
+
 }
