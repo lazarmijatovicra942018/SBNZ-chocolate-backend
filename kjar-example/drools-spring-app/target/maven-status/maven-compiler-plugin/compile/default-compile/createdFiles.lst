@@ -4,6 +4,7 @@ chocolate_recomendation\repository\ChocolatePurchaseRepository.class
 chocolate_recomendation\controller\UserController.class
 chocolate_recomendation\repository\StorageRepository.class
 chocolate_recomendation\utils\MavenUtils.class
+chocolate_recomendation\repository\FailedLoginAttemptRepository.class
 chocolate_recomendation\repository\ChocolateRepository.class
 chocolate_recomendation\service\UserService.class
 chocolate_recomendation\service\ChocolateService.class

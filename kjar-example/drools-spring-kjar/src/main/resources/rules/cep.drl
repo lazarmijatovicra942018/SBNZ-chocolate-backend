@@ -1,0 +1,176 @@
+package rules;
+import demo.facts.User;
+import java.util.List
+import demo.facts.*;
+import java.util.ArrayList;
+
+import java.util.Date;
+
+
+declare FailedLoginAttemptEvent
+    @role(event)
+    userEmail : String
+    reason : String
+end
+
+declare SpamGrader
+    @role(event)
+    userEmail : String
+    reason : String
+end
+
+
+
+
+
+
+rule "User failed to login 3 times  ."
+    agenda-group "cep-login"
+    lock-on-active
+    when
+
+        $user: User($email : email)
+        $fl: FailedLoginAttempt(userEmail == $email)
+        not(exists(FailedLoginAttemptEvent(userEmail == $email , reason == "User failed to login 3 times in one hour.")))
+
+        $n: Number(intValue>1) from accumulate(
+              $fl2: FailedLoginAttempt(
+                            this != $fl,
+                            userEmail == $email,
+                            this meets[1h] $fl
+                        ),
+                        count($fl2)
+        )
+
+    then
+        insert(new FailedLoginAttemptEvent($email , "User failed to login 3 times in one hour."));
+        modify($user){block()};
+        System.out.println("User failed to login 3 times in one hour.\n");
+
+end
+
+
+
+
+
+
+
+
+rule "User graded more than 4 chocolates with bad grade in 3 minutes  ."
+    agenda-group "cep-spamer"
+    lock-on-active
+    when
+
+        $user: User($email : email)
+        $cg: ChocolateGrade(userEmail ==  $email , grade<3)
+        not(exists(SpamGrader(userEmail == $email , reason == "User graded more than 4 chocolates with bad grade in 3 minutes  .")))
+
+        $n: Number(intValue>3) from accumulate(
+              $cg2: ChocolateGrade(
+                            this != $cg,
+                            grade<3,
+                            userEmail == $email,
+                            this meets[3m] $cg
+                        ),
+                        count($cg2)
+        )
+
+    then
+        insert(new SpamGrader($email , "User graded more than 4 chocolates with bad grade in 3 minutes  ."));
+        System.out.println("User graded more than 4 chocolates with bad grade in 3 minutes  .");
+        modify($user){spam()};
+end
+
+
+
+rule "None to bronze  ."
+    agenda-group "cep-category"
+    lock-on-active
+    when
+
+        $user: User($email : email, userRank == UserRank.NONE)
+
+        $n: Number(intValue>=1000) from accumulate(
+        $cp: ChocolatePurchase( userEmail == $email , $a: ammount , $p : price)   over window:time ( 720h ),
+                     sum($p*$a)
+        )
+
+    then
+        modify($user){setUserRank(UserRank.BRONZE)};
+end
+
+
+
+rule "Bronze to silver  ."
+    agenda-group "cep-category"
+    lock-on-active
+    when
+
+        $user: User($email : email, userRank == UserRank.BRONZE)
+
+        $n: Number(intValue>=2000) from accumulate(
+        $cp: ChocolatePurchase( userEmail == $email , $a: ammount , $p : price)   over window:time ( 720h ),
+                     sum($p*$a)
+        )
+
+    then
+        modify($user){setUserRank(UserRank.SILVER)};
+end
+
+
+
+
+
+
+rule "Silver to gold  ."
+    agenda-group "cep-category"
+    lock-on-active
+    when
+
+        $user: User($email : email, userRank == UserRank.SILVER)
+
+        $n: Number(intValue>=3000) from accumulate(
+        $cp: ChocolatePurchase( userEmail == $email , $a: ammount , $p : price)   over window:time ( 720h ),
+                     sum($p*$a)
+        )
+
+    then
+        modify($user){setUserRank(UserRank.GOLD)};
+end
+
+
+
+
+rule "Gold to platinum ."
+    agenda-group "cep-category"
+    lock-on-active
+    when
+
+        $user: User($email : email, userRank == UserRank.GOLD)
+
+        $n: Number(intValue>=4000) from accumulate(
+        $cp: ChocolatePurchase( userEmail == $email , $a: ammount , $p : price)   over window:time ( 720h ),
+                     sum($p*$a)
+        )
+
+    then
+        modify($user){setUserRank(UserRank.PLATINUM)};
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

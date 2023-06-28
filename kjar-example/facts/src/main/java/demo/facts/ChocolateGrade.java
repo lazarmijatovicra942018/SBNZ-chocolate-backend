@@ -1,12 +1,22 @@
 package demo.facts;
 
 
+import org.kie.api.definition.type.Position;
+import org.kie.api.definition.type.Role;
+
 import java.io.Serializable;
 
+@Role(Role.Type.EVENT)
 public class ChocolateGrade implements Serializable {
     private String  gradeId;
+
+    @Position(0)
     private String userEmail ;
+
+    @Position(1)
     private String chocolateName;
+
+    @Position(2)
     private int grade;
 
     public ChocolateGrade(String userEmail, String chocolateName, int grade) {

@@ -1,8 +1,5 @@
 package demo.facts;
 
-import demo.facts.UserRank;
-import demo.facts.UserType;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +19,12 @@ public class User implements Serializable{
 
 
     private boolean isFirstTimeLogin;
+
+
+    private boolean isBlocked;
+
+    private boolean isSpam;
+
 
 
     private List<String>  favouriteIngredients = new ArrayList<>();
@@ -47,7 +50,8 @@ public class User implements Serializable{
         this.userType = userType;
         this.userRank = userRank;
         this.isFirstTimeLogin = true;
-
+        this.isBlocked = false;
+        this.isSpam = false;
 
     }
 
@@ -64,6 +68,9 @@ public class User implements Serializable{
         this.favouriteIngredients = user.favouriteIngredients;
         this.dislikedIngredients = user.dislikedIngredients;
         this.grading = user.grading;
+        this.isBlocked = user.isBlocked;
+        this.isSpam = user.isSpam;
+
     }
 
     public User() {
@@ -181,4 +188,33 @@ public class User implements Serializable{
     public void setUserRank(UserRank userRank) {
         this.userRank = userRank;
     }
+
+    public boolean getIsBlocked() {
+        return isBlocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        isBlocked = blocked;
+    }
+
+    public void block(){
+        isBlocked = true;
+    }
+
+    public boolean isBlocked() {
+        return isBlocked;
+    }
+
+    public boolean getIsSpam() {
+        return isSpam;
+    }
+
+    public void setSpam(boolean spam) {
+        isSpam = spam;
+    }
+
+    public void spam() {
+        isSpam = true;
+    }
+
 }

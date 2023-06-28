@@ -5,6 +5,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.kie.api.definition.type.Role;
+@Role(Role.Type.EVENT)
 public class ChocolatePurchase implements Serializable {
 
     private String  purchaseId;
@@ -12,10 +14,13 @@ public class ChocolatePurchase implements Serializable {
     private String chocolateName;
     private int ammount;
 
+    private float price;
+
     private Date dateOfPurchase;
 
     public ChocolatePurchase() {
     }
+
 
     public ChocolatePurchase( String userEmail, String chocolateName, int ammount) {
         this.dateOfPurchase = new Date();
@@ -23,17 +28,27 @@ public class ChocolatePurchase implements Serializable {
         this.chocolateName = chocolateName;
         this.ammount = ammount;
         this.purchaseId = generateId(this.userEmail,this.chocolateName,this.dateOfPurchase);
-
+        this.price = 50;
 
     }
 
-    public ChocolatePurchase( String userEmail, String chocolateName, int ammount , Date dateOfPurchase) {
+    public ChocolatePurchase( String userEmail, String chocolateName, int ammount, float price) {
+        this.dateOfPurchase = new Date();
+        this.userEmail = userEmail;
+        this.chocolateName = chocolateName;
+        this.ammount = ammount;
+        this.purchaseId = generateId(this.userEmail,this.chocolateName,this.dateOfPurchase);
+        this.price = price;
+
+    }
+
+    public ChocolatePurchase( String userEmail, String chocolateName, int ammount , Date dateOfPurchase, float price) {
         this.dateOfPurchase = dateOfPurchase;
         this.userEmail = userEmail;
         this.chocolateName = chocolateName;
         this.ammount = ammount;
         this.purchaseId = generateId(this.userEmail,this.chocolateName,this.dateOfPurchase);
-
+        this.price = price;
 
     }
 
@@ -89,5 +104,13 @@ public class ChocolatePurchase implements Serializable {
 
     public void setDateOfPurchase(Date dateOfPurchase) {
         this.dateOfPurchase = dateOfPurchase;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 }

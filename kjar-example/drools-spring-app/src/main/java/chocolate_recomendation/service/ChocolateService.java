@@ -4,9 +4,16 @@ import chocolate_recomendation.repository.*;
 import chocolate_recomendation.utils.MavenUtils;
 import demo.facts.*;
 import org.apache.maven.shared.invoker.MavenInvocationException;
+import org.drools.core.ClockType;
 import org.drools.template.ObjectDataCompiler;
+import org.kie.api.KieBase;
+import org.kie.api.KieBaseConfiguration;
+import org.kie.api.KieServices;
+import org.kie.api.conf.EventProcessingOption;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.KieSessionConfiguration;
+import org.kie.api.runtime.conf.ClockTypeOption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +55,21 @@ public class ChocolateService {
         this.objectDataCompiler = new ObjectDataCompiler();
     }
 
+
+
+    public KieSession GetKieSession(){
+        KieServices ks = KieServices.Factory.get();
+
+        KieBaseConfiguration kconf = ks.newKieBaseConfiguration();
+        kconf.setOption(EventProcessingOption.STREAM);
+        KieBase kieBase = kieContainer.newKieBase(kconf);
+        KieSessionConfiguration kconfig1 = ks.newKieSessionConfiguration();
+        return kieBase.newKieSession(kconfig1, null);
+
+    }
+
+
+
     public List<Chocolate> getAll(){
 
         return repository.getChocolates();
@@ -56,13 +78,13 @@ public class ChocolateService {
 
     public Chocolate getOneByName(String chocolateName){
         Chocolate chocolate = repository.getChocolates().stream().filter(c->c.getName().equals(chocolateName)).findFirst().orElse(null);
-        KieSession kieSession = kieContainer.newKieSession();
+        KieSession kieSession = GetKieSession();
         kieSession.insert(chocolate);
         List<ChocolateGrade> chocolateGrades = chocolateGradeRepository.getChocolateGrades();
         for(ChocolateGrade cg : chocolateGrades){
             kieSession.insert(cg);
         }
-        kieSession.getAgenda().getAgendaGroup("grading").setFocus();
+        kieSession.getAgenda().getAgendaGroup("cep-login").setFocus();
         kieSession.fireAllRules();
         kieSession.dispose();
 
@@ -74,7 +96,7 @@ public class ChocolateService {
     public Chocolate getOneByNameWithDiscount(String chocolateName,int amount){
         Chocolate chocolate = new Chocolate(repository.getChocolates().stream().filter(c->c.getName().equals(chocolateName)).findFirst().orElse(null));
         chocolate.setAmmount(amount);
-        KieSession kieSession = kieContainer.newKieSession();
+        KieSession kieSession = GetKieSession();
         kieSession.insert(chocolate);
         List<ChocolateGrade> chocolateGrades = chocolateGradeRepository.getChocolateGrades();
         for(ChocolateGrade cg : chocolateGrades){
@@ -113,7 +135,7 @@ public class ChocolateService {
 
     public List<Chocolate> getDiscountedChocolateWithAmmount(int ammount){
 
-        KieSession kieSession = kieContainer.newKieSession();
+        KieSession kieSession = GetKieSession();
         List<Chocolate> original = repository.getChocolates();
         List<Chocolate> chocolates = new ArrayList<>();
 
@@ -148,7 +170,11 @@ public class ChocolateService {
 
         User loggedUser = userRepository.getLoggedUser();
 
-        kieSession.insert(userRepository.getLoggedUser());
+        kieSession.insert(loggedUser);
+
+
+    //    kieSession.setGlobal("registeredUser",loggedUser );
+
         kieSession.getAgenda().getAgendaGroup("discount").setFocus();
         kieSession.fireAllRules();
 
@@ -160,6 +186,13 @@ public class ChocolateService {
         kieSession.getAgenda().getAgendaGroup("recommend-registered").setFocus();
         kieSession.fireAllRules();
 
+        List<User> users = userRepository.getUsers();
+
+
+
+        kieSession.getAgenda().getAgendaGroup("backward-chaining").setFocus();
+        kieSession.fireAllRules();
+
         kieSession.dispose();
         chocolates.sort(Comparator.comparing(Chocolate::getScore).reversed());
         return chocolates;
@@ -169,7 +202,7 @@ public class ChocolateService {
 
     public List<Chocolate> getChocolatesForUnregisteredUsers(){
 
-        KieSession kieSession = kieContainer.newKieSession();
+        KieSession kieSession = GetKieSession();
         List<Chocolate> original = repository.getChocolates();
         List<Chocolate> chocolates = new ArrayList<>();
 
@@ -245,7 +278,8 @@ public class ChocolateService {
     }
 
     public String getRuleTemplate(Rule r){
-        String filePath = "..\\kjar-example\\drools-spring-kjar\\src\\main\\resources\\rules\\templates\\GeneralTemplate.drt";
+    //    String filePath = "..\\kjar-example\\drools-spring-kjar\\src\\main\\resources\\rules\\templates\\GeneralTemplate.drt";
+        String filePath = "C:\\Users\\lazar\\OneDrive\\Desktop\\fakultet\\SBNZ NOVI PROJEKAT\\SBNZ-chocolate-backend\\kjar-example\\drools-spring-kjar\\src\\main\\resources\\rules\\templates\\GeneralTemplate.drt";
         String rule = "";
         InputStream inputStream;
         try {

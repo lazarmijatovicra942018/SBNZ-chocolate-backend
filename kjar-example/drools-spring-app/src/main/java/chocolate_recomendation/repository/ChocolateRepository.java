@@ -104,7 +104,7 @@ public class ChocolateRepository {
         chocolates.add(c5);
 
 
-
+/*
         List<String> ingredients6= new ArrayList<>();
         ingredients6.add(ingredients.get(2));
         ingredients6.add(ingredients.get(11));
@@ -192,7 +192,7 @@ public class ChocolateRepository {
         chocolates.add(c16);
 
 
-
+*/
     }
 
 

@@ -1,0 +1,90 @@
+package rules;
+import demo.facts.Item;
+import demo.facts.Chocolate;
+import demo.facts.User;
+import java.util.List
+import demo.facts.ChocolateGrade;
+import demo.facts.ChocolatePurchase;
+import java.util.ArrayList;
+
+import java.util.Date;
+
+
+
+query chocolateGradingFarAway(String $chocolateName, String email)
+     ChocolateGrade(chocolateName == $chocolateName , grade>3, $email2 :userEmail, userEmail != email) and
+     atLeastTwoGoodGrades($email2;) and
+     chocolateNotGradedByThatUser($chocolateName, email ;) and
+     not(chocolateSamePeopleGraded($chocolateName,email;))
+     and  exists(chainingChocolate(email,$email2;))
+
+end
+
+
+query chainingChocolate( String $email, String email2)
+       otherKnownUserGrading($email,email2;)
+       or
+      (
+      otherKnownUserGrading($email3,email2;)   and    otherKnownUserGrading($email,$email3;)
+      )
+
+end
+
+
+query atLeastTwoGoodGrades(String email)
+       List(size > 1) from accumulate(
+                                        $c:  ChocolateGrade(userEmail == email,grade>3),
+                                        collectList($c)
+                             )
+
+end
+query chocolateSamePeopleGraded(String $chocolateName, String email)
+    chocolateNotGradedByThatUser($chocolateName, email ;)
+    and exists(otherUserGrading($chocolateName,email;))
+end
+
+query otherUserGrading(String $chocolateName , String email)
+     $c: ChocolateGrade(userEmail == email,grade>3)
+     $n: ChocolateGrade(userEmail != email, chocolateName == $chocolateName, grade>3)
+     ChocolateGrade(userEmail == $n.getUserEmail(), chocolateName == $c.getChocolateName(), grade>3)
+end
+
+query otherKnownUserGrading( String email, String email2)
+     $c: ChocolateGrade(userEmail == email,grade>3) and
+     $n: ChocolateGrade(userEmail == email2,userEmail!= email, grade>3) and
+     ChocolateGrade(userEmail == email2, chocolateName == $c.getChocolateName(), grade>3)
+end
+
+
+
+
+query chocolateNotGradedByThatUser(String $chocolateName, String email)
+    not(exists(ChocolateGrade(userEmail == email, chocolateName == $chocolateName)))
+end
+
+rule "Add 118 points to score of chocolate if there is user that graded it good and that user and logged user graded  other chocolate good . "
+    agenda-group "backward-chaining"
+    lock-on-active true
+    when
+        User($email : email)
+        $c: Chocolate($chocolateName: name )
+        chocolateSamePeopleGraded($chocolateName,$email;)
+    then
+         modify($c){setScore($c.getScore()+118)};
+end
+
+
+rule "Add 75 points to score of chocolate has similar grading with user conncected by another user . "
+    agenda-group "backward-chaining"
+    lock-on-active true
+    when
+        User($email : email)
+        $c: Chocolate($chocolateName: name )
+        chocolateGradingFarAway($chocolateName,$email;)
+    then
+        modify($c){setScore($c.getScore()+75)};
+end
+
+
+
+

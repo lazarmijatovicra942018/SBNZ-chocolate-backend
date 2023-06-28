@@ -1,5 +1,6 @@
 package chocolate_recomendation.repository;
 
+import demo.facts.FailedLoginAttempt;
 import demo.facts.User;
 import demo.facts.UserRank;
 import demo.facts.UserType;
@@ -14,6 +15,7 @@ public class UserRepository {
 
     private static UserRepository instance = new UserRepository();
     private List<User> users;
+
 
     private User loggedUser;
 
@@ -31,7 +33,6 @@ public class UserRepository {
     }
 
     public UserRepository(){
-
             initUsers();
 
     }
@@ -39,6 +40,9 @@ public class UserRepository {
 
     private void initUsers(){
         users = new ArrayList<>();
+
+
+
         User user1 = new User("lazar@gmail.com","lazar","Lazar", "Mijatovic" , "566566" , UserType.ADMINISTRATOR ,UserRank.NONE);
         User user2 = new User("none@gmail.com","none","none", "none" , "566566" , UserType.REGISTERED_USER ,UserRank.NONE);
         User user3 = new User("bronze@gmail.com","bronze","bronze", "bronze" , "566566" , UserType.REGISTERED_USER ,UserRank.BRONZE);
@@ -53,9 +57,13 @@ public class UserRepository {
         this.users.add(user5);
         this.users.add(user6);
 //OBRISI
-   //     loggedUser = user2;
+        loggedUser = user2;
 
     }
+
+
+
+
 
     public List<User> getUsers(){
        return users;

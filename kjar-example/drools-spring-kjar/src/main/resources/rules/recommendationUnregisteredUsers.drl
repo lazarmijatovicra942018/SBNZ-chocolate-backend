@@ -170,7 +170,6 @@ rule "Subtract 50 if there is a chocolate of same manufacturer with similar scor
                  )
     then
         modify($c){setScore($c.getScore()-50)};
-        System.out.println($c.getName());
 end
 
 

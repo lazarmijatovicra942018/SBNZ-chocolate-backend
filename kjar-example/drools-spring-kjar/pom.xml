@@ -17,7 +17,7 @@
   <packaging>kjar</packaging>
 
   <dependencies>
-    
+
     <dependency>
       <groupId>demo</groupId>
       <artifactId>facts</artifactId>
