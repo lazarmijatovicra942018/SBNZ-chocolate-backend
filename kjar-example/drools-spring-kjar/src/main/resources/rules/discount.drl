@@ -4,6 +4,8 @@ import demo.facts.Chocolate;
 import demo.facts.User;
 import demo.facts.UserRank;
 
+
+
 rule "Discount for 5-9  candies"
     agenda-group "discount"
     lock-on-active true

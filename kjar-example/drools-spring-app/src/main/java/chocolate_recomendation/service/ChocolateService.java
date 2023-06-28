@@ -243,14 +243,25 @@ public class ChocolateService {
         ChocolateGrade chocolateGrade = new ChocolateGrade( userRepository.getLoggedUser().getEmail(), chocolateName ,grade);
         List<ChocolateGrade> chocolateGrades = chocolateGradeRepository.getChocolateGrades();
         ChocolateGrade cg =  chocolateGrades.stream().filter(c->c.getGradeId().equals(chocolateGrade.getGradeId())).findFirst().orElse(null);
+
+
+
         if(cg==null){
             chocolateGrades.add(chocolateGrade);
+            this.CepSpamRules();
             return chocolateGrade;
         }else{
             cg.setGrade(grade);
+            this.CepSpamRules();
             return cg;
         }
+
+
+
+
     }
+
+
 
 
     public Object addChocolatePurchase(String chocolateName , int amount){
@@ -302,4 +313,23 @@ public class ChocolateService {
     }
 
 
+    public void  CepSpamRules(){
+        KieSession kieSession = GetKieSession();
+
+
+        List<ChocolateGrade> chocolateGrades = chocolateGradeRepository.getChocolateGrades();
+
+        for(ChocolateGrade cg : chocolateGrades){
+            kieSession.insert(cg);
+        }
+
+        User loggedUser = userRepository.getLoggedUser();
+
+        kieSession.insert(loggedUser);
+
+
+        kieSession.getAgenda().getAgendaGroup("cep-spamer").setFocus();
+        kieSession.fireAllRules();
+
+    }
 }
