@@ -12,6 +12,7 @@ import java.util.Date;
 global Date sixMonthsAgo;
 
 
+
 rule "Set Score to -1000 if the chocolate has bad grade from that user."
     agenda-group "recommend-registered"
     lock-on-active true
@@ -160,7 +161,7 @@ end
 
 
 
-
+/*
 rule "Add 80  to score if chocolate has good average  grade or no grades but it has not been sold in past six months."
     agenda-group "recommend-registered"
     lock-on-active true
@@ -195,7 +196,7 @@ end
 
 
 
-
+*/
 
 
 
