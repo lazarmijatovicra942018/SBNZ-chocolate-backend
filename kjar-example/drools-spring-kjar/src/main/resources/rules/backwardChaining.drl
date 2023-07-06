@@ -13,9 +13,9 @@ import java.util.Date;
 
 query chocolateGradingFarAway(String $chocolateName, String $email)
      exists(ChocolateGrade(chocolateName == $chocolateName , grade>3, $email2 :userEmail, userEmail != $email)) and
-     chocolateNotGradedByThatUser($chocolateName, email ;) and
-     not(chocolateSamePeopleGraded($chocolateName,email;))
-     and  exists(chainingChocolate(email,$email2;))
+     chocolateNotGradedByThatUser($chocolateName, $email ;) and
+     not(chocolateSamePeopleGraded($chocolateName,$email;))
+     and  exists(chainingChocolate($chocolateName,$email;))
 
 end
 
