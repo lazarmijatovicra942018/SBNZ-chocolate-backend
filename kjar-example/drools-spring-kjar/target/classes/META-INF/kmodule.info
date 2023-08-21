@@ -79,8 +79,8 @@
         <string>Discount for 5-9  candies</string>
         <string>Add 60  to score if chocolate is of favourite manufacturer(3 or more purchases of manufacturer and no bad grade for that manufacturer)</string>
         <string>Add 50 if all ingredients from chocolate are unique</string>
-        <string>Subtract 100 if there is a chocolate with three or more same ingredients with higher or equal score</string>
         <string>Silver to gold  .</string>
+        <string>Subtract 100 if there is a chocolate with three or more same ingredients with higher or equal score</string>
         <string>Add 100  to score if chocolate  has better  better users grade than average grade by that user or it is highest grade .</string>
         <string>Add 20  if chocolate has 10% less  sugar then average % of sugar in all chocolates</string>
         <string>Add 118 points to score of chocolate if there is user that graded it good and that user and logged user graded  other chocolate good . </string>
@@ -97,14 +97,14 @@
         <string>Add 10  to score if chocolate  price/weight is cheaper than average price/weight.</string>
         <string>Add 75 points to score of chocolate has similar grading with user conncected by another user . </string>
         <string>Discount for gold user</string>
-        <string>Set Score to -1000 if the chocolate has bad grade from that user.</string>
         <string>None to bronze  .</string>
+        <string>Set Score to -1000 if the chocolate has bad grade from that user.</string>
         <string>chocolateGradingFarAway</string>
         <string>differentChocolateWithSameIngredient</string>
         <string>uniqueChocolate</string>
         <string>Add 150  to score if there are 3 or more good grades(4 or five) and average grade is a good grade</string>
-        <string>Subtract 200 if chocolate has bad  average grade and 3 or more bad grades</string>
         <string>Discount for bronze user and spent more than 2000</string>
+        <string>Subtract 200 if chocolate has bad  average grade and 3 or more bad grades</string>
         <string>Discount for silver user and spent more than 3000</string>
         <string>chocolateSamePeopleGraded</string>
         <string>Put the score to -500 of chocolate with tree or more grades less than three and average grade less or equal to two if there are 15 or more chocolates with no average grade or average grade grater than two</string>

@@ -5,12 +5,54 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74770552-aee5-4934-8498-e6b5e718ec46" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../drools-spring-app/src/test/java/tests/BackChainingTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-app/src/test/java/tests/BackChainingTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-app/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-app/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-app/src/main/java/chocolate_recomendation/controller/ChocolateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-app/src/main/java/chocolate_recomendation/controller/ChocolateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-app/src/main/java/chocolate_recomendation/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-app/src/main/java/chocolate_recomendation/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-app/src/main/java/chocolate_recomendation/repository/ChocolateGradeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-app/src/main/java/chocolate_recomendation/repository/ChocolateGradeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-app/src/main/java/chocolate_recomendation/repository/ChocolateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-app/src/main/java/chocolate_recomendation/repository/ChocolateRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-app/src/main/java/chocolate_recomendation/repository/FailedLoginAttemptRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-app/src/main/java/chocolate_recomendation/repository/FailedLoginAttemptRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-app/src/main/java/chocolate_recomendation/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-app/src/main/java/chocolate_recomendation/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-app/src/main/java/chocolate_recomendation/service/ChocolateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-app/src/main/java/chocolate_recomendation/service/ChocolateService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-app/target/classes/chocolate_recomendation/controller/ChocolateController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-app/target/classes/chocolate_recomendation/controller/ChocolateController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-app/target/classes/chocolate_recomendation/repository/ChocolateGradeRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-app/target/classes/chocolate_recomendation/repository/ChocolateGradeRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-app/target/classes/chocolate_recomendation/repository/ChocolateRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-app/target/classes/chocolate_recomendation/repository/ChocolateRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-app/target/classes/chocolate_recomendation/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-app/target/classes/chocolate_recomendation/repository/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-app/target/classes/chocolate_recomendation/service/ChocolateService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-app/target/classes/chocolate_recomendation/service/ChocolateService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-app/target/drools-spring-app-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-app/target/drools-spring-app-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-app/target/drools-spring-app-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-app/target/drools-spring-app-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-app/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-app/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-app/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-app/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-kjar/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-kjar/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-kjar/bin/src/main/resources/rules/forward_chaining/discount.drl" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-kjar/bin/src/main/resources/rules/forward_chaining/discount.drl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-kjar/bin/target/classes/rules/forward_chaining/discount.drl" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-kjar/bin/target/classes/rules/forward_chaining/discount.drl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../drools-spring-kjar/src/main/resources/rules/backwardChaining.drl" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-kjar/src/main/resources/rules/backwardChaining.drl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-kjar/src/main/resources/rules/cep.drl" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-kjar/src/main/resources/rules/cep.drl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-kjar/src/main/resources/rules/discount.drl" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-kjar/src/main/resources/rules/discount.drl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-kjar/src/main/resources/rules/grading.drl" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-kjar/src/main/resources/rules/grading.drl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-kjar/src/main/resources/rules/recomendationRegisteredUsers.drl" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-kjar/src/main/resources/rules/recomendationRegisteredUsers.drl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-kjar/src/main/resources/rules/recommendationUnregisteredUsers.drl" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-kjar/src/main/resources/rules/recommendationUnregisteredUsers.drl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-kjar/src/main/resources/rules/templates/GeneralTemplate.drt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../drools-spring-kjar/target/classes/META-INF/defaultKieBase/kbase.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-kjar/target/classes/META-INF/defaultKieBase/kbase.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../drools-spring-kjar/target/classes/META-INF/kmodule.info" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-kjar/target/classes/META-INF/kmodule.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-kjar/target/classes/rules/discount.drl" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-kjar/target/classes/rules/discount.drl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-kjar/target/classes/rules/grading.drl" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-kjar/target/classes/rules/grading.drl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-kjar/target/classes/rules/recomendationRegisteredUsers.drl" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-kjar/target/classes/rules/recomendationRegisteredUsers.drl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../drools-spring-kjar/target/classes/rules/recommendationUnregisteredUsers.drl" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-kjar/target/classes/rules/recommendationUnregisteredUsers.drl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../drools-spring-kjar/target/drools-spring-kjar-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../drools-spring-kjar/target/drools-spring-kjar-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/demo/facts/Chocolate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/demo/facts/Chocolate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/demo/facts/ChocolatePurchase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/demo/facts/ChocolatePurchase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/demo/facts/Item.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/demo/facts/Chocolate.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/demo/facts/Chocolate.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/demo/facts/ChocolatePurchase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/demo/facts/ChocolatePurchase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/demo/facts/Item$Category.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/demo/facts/Item.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/facts-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/facts-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,25 +65,20 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
   <component name="ProjectId" id="2Rq9L5IjW4WO3ebySeU4GAYuqFv" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/lazar/OneDrive/Desktop/fakultet/SBNZ NOVI PROJEKAT/SBNZ-chocolate-backend/kjar-example/facts&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/lazar/OneDrive/Desktop/DIPLOMSKI/SBNZ-chocolate-backend/kjar-example",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -50,7 +87,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1687966685010</updated>
+      <workItem from="1692630175287" duration="70000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

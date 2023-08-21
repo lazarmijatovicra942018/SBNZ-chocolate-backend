@@ -12,7 +12,7 @@ public class ChocolatePurchase implements Serializable {
     private String  purchaseId;
     private String userEmail ;
     private String chocolateName;
-    private int ammount;
+    private int amount;
 
     private float price;
 
@@ -22,31 +22,31 @@ public class ChocolatePurchase implements Serializable {
     }
 
 
-    public ChocolatePurchase( String userEmail, String chocolateName, int ammount) {
+    public ChocolatePurchase( String userEmail, String chocolateName, int amount) {
         this.dateOfPurchase = new Date();
         this.userEmail = userEmail;
         this.chocolateName = chocolateName;
-        this.ammount = ammount;
+        this.amount = amount;
         this.purchaseId = generateId(this.userEmail,this.chocolateName,this.dateOfPurchase);
         this.price = 50;
 
     }
 
-    public ChocolatePurchase( String userEmail, String chocolateName, int ammount, float price) {
+    public ChocolatePurchase( String userEmail, String chocolateName, int amount, float price) {
         this.dateOfPurchase = new Date();
         this.userEmail = userEmail;
         this.chocolateName = chocolateName;
-        this.ammount = ammount;
+        this.amount = amount;
         this.purchaseId = generateId(this.userEmail,this.chocolateName,this.dateOfPurchase);
         this.price = price;
 
     }
 
-    public ChocolatePurchase( String userEmail, String chocolateName, int ammount , Date dateOfPurchase, float price) {
+    public ChocolatePurchase( String userEmail, String chocolateName, int amount , Date dateOfPurchase, float price) {
         this.dateOfPurchase = dateOfPurchase;
         this.userEmail = userEmail;
         this.chocolateName = chocolateName;
-        this.ammount = ammount;
+        this.amount = amount;
         this.purchaseId = generateId(this.userEmail,this.chocolateName,this.dateOfPurchase);
         this.price = price;
 
@@ -90,12 +90,12 @@ public class ChocolatePurchase implements Serializable {
         this.chocolateName = chocolateName;
     }
 
-    public int getAmmount() {
-        return ammount;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setAmmount(int ammount) {
-        this.ammount = ammount;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public Date getDateOfPurchase() {

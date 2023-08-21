@@ -1,5 +1,4 @@
 package rules.forward_chaining;
-import demo.facts.Item;
 import demo.facts.Chocolate;
 import demo.facts.User;
 import demo.facts.UserRank;
@@ -7,7 +6,7 @@ import demo.facts.UserRank;
 rule "Discount for 5-9  candies"
     agenda-group "discount"
     when
-        $c: Chocolate(ammount>4 , ammount< 10 )
+        $c: Chocolate(amount>4 , amount< 10 )
     then
         modify($c){setDiscount($c.getDiscount()+5)};
 end
@@ -15,7 +14,7 @@ end
 rule "Discount for 10-19  candies"
     agenda-group "discount"
     when
-        $c: Chocolate(ammount>9 , ammount< 20)
+        $c: Chocolate(amount>9 , amount< 20)
     then
         modify($c){setDiscount($c.getDiscount()+10)};
 end
@@ -24,7 +23,7 @@ end
 rule "Discount for 20 and more candies"
     agenda-group "discount"
     when
-        $c: Chocolate( 19<ammount )
+        $c: Chocolate( 19<amount )
     then
         modify($c){setDiscount($c.getDiscount()+15)};
 end
@@ -80,7 +79,7 @@ end
 rule "Discount for none user and spent more than 1000"
     agenda-group "discount"
     when
-        $c: Chocolate((price*ammount)>1000.0)
+        $c: Chocolate((price*amount)>1000.0)
         $u:User(userRank == UserRank.NONE)
 
     then
@@ -91,7 +90,7 @@ end
 rule "Discount for bronze user and spent more than 2000"
     agenda-group "discount"
     when
-        $c: Chocolate((price*ammount) > 2000.0)
+        $c: Chocolate((price*amount) > 2000.0)
         $u:User(userRank == UserRank.BRONZE)
 
     then
@@ -102,7 +101,7 @@ end
 rule "Discount for silver user and spent more than 3000"
     agenda-group "discount"
     when
-        $c: Chocolate((price*ammount)> 3000.0)
+        $c: Chocolate((price*amount)> 3000.0)
         $u:User(userRank == UserRank.SILVER)
 
     then
@@ -113,7 +112,7 @@ end
 rule "Discount for gold user and spent more than 4000"
     agenda-group "discount"
     when
-        $c: Chocolate((price*ammount) > 4000.0)
+        $c: Chocolate((price*amount) > 4000.0)
         $u:User(userRank == UserRank.GOLD)
 
     then

@@ -3,7 +3,7 @@ package chocolate_recomendation.controller;
 
 //import chocolate_recomendation.service.UserService;
 
-import demo.facts.Item;
+
 import demo.facts.User;
 import chocolate_recomendation.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

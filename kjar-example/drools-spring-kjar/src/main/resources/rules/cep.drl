@@ -53,9 +53,6 @@ end
 
 
 
-
-
-
 rule "User graded more than 4 chocolates with bad grade in 3 minutes  ."
     agenda-group "cep-spamer"
     lock-on-active
@@ -91,7 +88,7 @@ rule "None to bronze  ."
         $user: User($email : email, userRank == UserRank.NONE)
 
         $n: Number(intValue>=1000) from accumulate(
-        $cp: ChocolatePurchase( userEmail == $email , $a: ammount , $p : price)   over window:time ( 720h ),
+        $cp: ChocolatePurchase( userEmail == $email , $a: amount , $p : price)   over window:time ( 720h ),
                      sum($p*$a)
         )
 
@@ -109,7 +106,7 @@ rule "Bronze to silver  ."
         $user: User($email : email, userRank == UserRank.BRONZE)
 
         $n: Number(intValue>=2000) from accumulate(
-        $cp: ChocolatePurchase( userEmail == $email , $a: ammount , $p : price)   over window:time ( 720h ),
+        $cp: ChocolatePurchase( userEmail == $email , $a: amount , $p : price)   over window:time ( 720h ),
                      sum($p*$a)
         )
 
@@ -130,7 +127,7 @@ rule "Silver to gold  ."
         $user: User($email : email, userRank == UserRank.SILVER)
 
         $n: Number(intValue>=3000) from accumulate(
-        $cp: ChocolatePurchase( userEmail == $email , $a: ammount , $p : price)   over window:time ( 720h ),
+        $cp: ChocolatePurchase( userEmail == $email , $a: amount , $p : price)   over window:time ( 720h ),
                      sum($p*$a)
         )
 
@@ -149,7 +146,7 @@ rule "Gold to platinum ."
         $user: User($email : email, userRank == UserRank.GOLD)
 
         $n: Number(intValue>=4000) from accumulate(
-        $cp: ChocolatePurchase( userEmail == $email , $a: ammount , $p : price)   over window:time ( 720h ),
+        $cp: ChocolatePurchase( userEmail == $email , $a: amount , $p : price)   over window:time ( 720h ),
                      sum($p*$a)
         )
 

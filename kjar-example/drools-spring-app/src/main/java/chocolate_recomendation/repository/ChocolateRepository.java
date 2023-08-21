@@ -22,16 +22,8 @@ public class ChocolateRepository {
         return ingredients;
     }
 
-    public static void setIngredients(List<String> ingredients) {
-        ChocolateRepository.ingredients = ingredients;
-    }
-
     public List<Chocolate> getChocolates() {
         return chocolates;
-    }
-
-    public void setChocolates(List<Chocolate> chocolates) {
-        this.chocolates = chocolates;
     }
 
     public static ChocolateRepository getInstance() {

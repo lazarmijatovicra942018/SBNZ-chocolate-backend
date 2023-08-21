@@ -95,7 +95,7 @@ public class ChocolateService {
 
     public Chocolate getOneByNameWithDiscount(String chocolateName,int amount){
         Chocolate chocolate = new Chocolate(repository.getChocolates().stream().filter(c->c.getName().equals(chocolateName)).findFirst().orElse(null));
-        chocolate.setAmmount(amount);
+        chocolate.setAmount(amount);
         KieSession kieSession = GetKieSession();
         kieSession.insert(chocolate);
         List<ChocolateGrade> chocolateGrades = chocolateGradeRepository.getChocolateGrades();
@@ -133,7 +133,7 @@ public class ChocolateService {
 
 
 
-    public List<Chocolate> getDiscountedChocolateWithAmmount(int ammount){
+    public List<Chocolate> getDiscountedChocolateWithAmount(int amount){
 
         KieSession kieSession = GetKieSession();
         List<Chocolate> original = repository.getChocolates();
@@ -141,7 +141,7 @@ public class ChocolateService {
 
         for(Chocolate c : original){
             Chocolate cl = new Chocolate(c);
-            cl.setAmmount(ammount);
+            cl.setAmount(amount);
             chocolates.add(cl);
             kieSession.insert(cl);
         }

@@ -15,16 +15,8 @@ public class FailedLoginAttemptRepository {
         return failedLoginAttempts;
     }
 
-    public void setFailedLoginAttempts(List<FailedLoginAttempt> failedLoginAttempts) {
-        this.failedLoginAttempts = failedLoginAttempts;
-    }
-
     public static FailedLoginAttemptRepository getInstance() {
         return instance;
-    }
-
-    public static void setInstance(FailedLoginAttemptRepository instance) {
-        FailedLoginAttemptRepository.instance = instance;
     }
 
     public FailedLoginAttemptRepository() {

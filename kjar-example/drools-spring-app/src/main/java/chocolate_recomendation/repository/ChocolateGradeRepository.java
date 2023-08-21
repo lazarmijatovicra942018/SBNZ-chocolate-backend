@@ -17,20 +17,12 @@ public class ChocolateGradeRepository {
         this.initChocolateGrade();
     }
 
-    public static void setInstance(ChocolateGradeRepository instance) {
-        ChocolateGradeRepository.instance = instance;
-    }
-
     public static ChocolateGradeRepository getInstance() {
         return instance;
     }
 
     public static List<ChocolateGrade> getChocolateGrades() {
         return chocolateGrades;
-    }
-
-    public static void setChocolateGrades(List<ChocolateGrade> chocolateGrades) {
-        ChocolateGradeRepository.chocolateGrades = chocolateGrades;
     }
 
     public void initChocolateGrade(){

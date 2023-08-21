@@ -34,7 +34,7 @@ public class ChocolateController {
 
     @RequestMapping(value = "/discount/{amount}", method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
     public List<Chocolate> findDiscountChocolateWithAmount(@PathVariable int amount) {
-        return chocolateService.getDiscountedChocolateWithAmmount(amount);
+        return chocolateService.getDiscountedChocolateWithAmount(amount);
     }
 
 

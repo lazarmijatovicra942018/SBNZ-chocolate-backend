@@ -1,5 +1,4 @@
 package rules;
-import demo.facts.Item;
 import demo.facts.Chocolate;
 import demo.facts.User;
 import java.util.List
@@ -95,7 +94,7 @@ rule "Add 100  if chocolate is in more than 7 purchases and has 50 or more bars 
          Number(intValue >= 50) from accumulate(
                     ChocolatePurchase(
                         chocolateName == $c.getName(),
-                        $a: ammount
+                        $a: amount
                     ),
                     init(int count = 0;),
                     action(count += $a;),

@@ -89,19 +89,5 @@ public class UserRepository {
         }
         return null;
     }
-    public void addFavouriteIngredient(String ingredient){
-        loggedUser.addFavouriteIngredient(ingredient);
-    }
-    public void removeFavouriteIngredient(String ingredient){
-        loggedUser.removeFavouriteIngredient(ingredient);
-    }
-
-    public void addDislikedIngredient(String ingredient){
-        loggedUser.addDislikedIngredient(ingredient);
-    }
-
-    public void removeDislikedIngredient(String ingredient){
-        loggedUser.removeDislikedIngredient(ingredient);
-    }
 
 }

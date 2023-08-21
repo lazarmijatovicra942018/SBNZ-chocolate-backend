@@ -21,7 +21,7 @@ public class Chocolate implements Serializable {
 
     private float discount;
 
-    private int ammount;
+    private int amount;
 
 
     private double grade;
@@ -87,12 +87,12 @@ public class Chocolate implements Serializable {
         this.grade = grade;
     }
 
-    public int getAmmount() {
-        return ammount;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setAmmount(int ammount) {
-        this.ammount = ammount;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public float getDiscount() {
@@ -164,18 +164,18 @@ public class Chocolate implements Serializable {
         this.manufacturer = manufacturer;
         this.price = price;
         this.discount =0;
-        this.ammount = 0 ;
+        this.amount = 0 ;
         this.score = 0;
         this.nutriScore = 0;
     }
 
-    public Chocolate(String name, List<String> ingrediants, String manufacturer, float price, float discount, int ammount) {
+    public Chocolate(String name, List<String> ingrediants, String manufacturer, float price, float discount, int amount) {
         this.name = name;
         this.ingredients = ingrediants;
         this.manufacturer = manufacturer;
         this.price = price;
         this.discount = discount;
-        this.ammount = ammount;
+        this.amount = amount;
         this.score = 0;
         this.nutriScore = 0;
     }
@@ -190,7 +190,7 @@ public class Chocolate implements Serializable {
         this.manufacturer = c.manufacturer;
         this.price = c.price;
         this.discount = c.discount;
-        this.ammount = c.ammount;
+        this.amount = c.amount;
         this.grade = c.grade;
         this.myGrade = c.myGrade;
         this.weight = c.weight;
@@ -207,7 +207,7 @@ public class Chocolate implements Serializable {
         this.manufacturer = manufacturer;
         this.price = price;
         this.discount = 0;
-        this.ammount = 0;
+        this.amount = 0;
         this.weight = weight;
         this.sugarContent = sugarContent;
         this.nutriScore = nutriScore;
@@ -223,8 +223,6 @@ public class Chocolate implements Serializable {
         this.ingredients = ingredients;
         this.manufacturer = manufacturer;
         this.price = price;
-        this.discount = discount;
-        this.ammount = ammount;
         this.grade = grade;
         this.myGrade = myGrade;
         this.weight = weight;
@@ -233,7 +231,7 @@ public class Chocolate implements Serializable {
         this.score = 0;
         this.calories = calories;
         this.discount = 0;
-        this.ammount = 0;
+        this.amount = 0;
     }
 }
 
