@@ -14,8 +14,8 @@ public class StorageRepository {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StorageRepository.class);
 
-  //  private static final String DRL_RULES_PATH = "..\\kjar-example\\drools-spring-kjar\\src\\main\\resources\\rules";
-    private static final String DRL_RULES_PATH = "C:\\Users\\lazar\\OneDrive\\Desktop\\fakultet\\SBNZ NOVI PROJEKAT\\SBNZ-chocolate-backend\\kjar-example\\drools-spring-kjar\\src\\main\\resources\\rules";
+    //private static final String DRL_RULES_PATH = "..\\kjar-example\\drools-spring-kjar\\src\\main\\resources\\rules";
+    private static final String DRL_RULES_PATH = "C:\\Users\\lazar\\OneDrive\\Desktop\\DIPLOMSKI\\SBNZ-chocolate-backend\\kjar-example\\drools-spring-kjar\\src\\main\\resources\\rules";
 
     private static final String DRL_EXTENSION = ".drl";
 

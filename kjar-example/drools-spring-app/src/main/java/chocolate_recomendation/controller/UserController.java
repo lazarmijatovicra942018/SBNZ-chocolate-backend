@@ -28,25 +28,17 @@ public class UserController {
 
   @Autowired
     private final UserService userService;
-
-
     @Autowired
     public UserController(UserService userService) {
 
         this.userService = userService;
     }
-
-
-
-
     @RequestMapping( method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
     public List<User> findAll() {
         List<User> u =  userService.getUsers();
         return u;
         //return new ResponseEntity<>("{Hej}", HttpStatus.OK);
     }
-
-
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> login(@RequestBody User user) {
         return new ResponseEntity<>(userService.login(user), HttpStatus.OK);

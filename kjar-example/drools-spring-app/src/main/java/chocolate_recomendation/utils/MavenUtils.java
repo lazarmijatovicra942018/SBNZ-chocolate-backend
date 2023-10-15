@@ -18,7 +18,7 @@ public class MavenUtils {
 
         InvocationRequest request = new DefaultInvocationRequest();
      //   request.setPomFile( new File( "drools-spring-kjar\\pom.xml" ) );
-        request.setPomFile( new File( "C:\\Users\\lazar\\OneDrive\\Desktop\\fakultet\\SBNZ NOVI PROJEKAT\\SBNZ-chocolate-backend\\kjar-example\\drools-spring-kjar\\pom.xml" ) );
+        request.setPomFile( new File( "C:\\Users\\lazar\\OneDrive\\Desktop\\DIPLOMSKI\\SBNZ-chocolate-backend\\kjar-example\\drools-spring-kjar\\pom.xml" ) );
 
         request.setGoals( Arrays.asList( "clean", "install" ) );
 

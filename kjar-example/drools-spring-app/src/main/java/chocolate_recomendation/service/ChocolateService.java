@@ -19,10 +19,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -32,20 +30,12 @@ public class ChocolateService {
 
 
     private final ChocolateRepository repository = ChocolateRepository.getInstance();
-
     private final StorageRepository storageRepository = new StorageRepository();
-
-
     private final ObjectDataCompiler objectDataCompiler;
-
     private final UserRepository userRepository = UserRepository.getInstance();
-
     private final ChocolateGradeRepository chocolateGradeRepository = ChocolateGradeRepository.getInstance();
-
     private final ChocolatePurchaseRepository chocolatePurchaseRepository = ChocolatePurchaseRepository.getInstance();
-
     private final KieContainer kieContainer;
-
     private static Logger log = LoggerFactory.getLogger(ChocolateService.class);
 
 
@@ -55,8 +45,6 @@ public class ChocolateService {
         this.objectDataCompiler = new ObjectDataCompiler();
     }
 
-
-
     public KieSession GetKieSession(){
         KieServices ks = KieServices.Factory.get();
 
@@ -65,16 +53,26 @@ public class ChocolateService {
         KieBase kieBase = kieContainer.newKieBase(kconf);
         KieSessionConfiguration kconfig1 = ks.newKieSessionConfiguration();
         return kieBase.newKieSession(kconfig1, null);
-
     }
-
-
-
     public List<Chocolate> getAll(){
+        KieSession kieSession = GetKieSession();
+        List<Chocolate> original = repository.getChocolates();
+        List<Chocolate> chocolates = new ArrayList<>();
+        for(Chocolate c : original){
+            Chocolate cl = new Chocolate(c);
+            chocolates.add(cl);
+            kieSession.insert(cl);
+        }
+        List<ChocolateGrade> chocolateGrades = chocolateGradeRepository.getChocolateGrades();
+        for(ChocolateGrade cg : chocolateGrades){
+            kieSession.insert(cg);
+        }
+        kieSession.getAgenda().getAgendaGroup("grading").setFocus();
+        kieSession.fireAllRules();
+        kieSession.dispose();
 
-        return repository.getChocolates();
+        return chocolates;
     }
-
 
     public Chocolate getOneByName(String chocolateName){
         Chocolate chocolate = repository.getChocolates().stream().filter(c->c.getName().equals(chocolateName)).findFirst().orElse(null);
@@ -127,12 +125,6 @@ public class ChocolateService {
         return repository.getIngredients();
     }
 
-
-
-
-
-
-
     public List<Chocolate> getDiscountedChocolateWithAmount(int amount){
 
         KieSession kieSession = GetKieSession();
@@ -145,14 +137,10 @@ public class ChocolateService {
             chocolates.add(cl);
             kieSession.insert(cl);
         }
-
         List<ChocolateGrade> chocolateGrades = chocolateGradeRepository.getChocolateGrades();
-
         for(ChocolateGrade cg : chocolateGrades){
             kieSession.insert(cg);
         }
-
-
         List<ChocolatePurchase> chocolatePurchase = chocolatePurchaseRepository.getChocolatePurchases();
 
         for(ChocolatePurchase cp : chocolatePurchase){
@@ -281,8 +269,10 @@ public class ChocolateService {
 
         this.storageRepository.save(rule.getId(), this.getRuleTemplate(rule));
 
-
         MavenUtils.mavenCleanAndInstallRules();
+
+
+
 
         return rule;
 
@@ -354,6 +344,25 @@ public class ChocolateService {
         kieSession.getAgenda().getAgendaGroup("cep-category").setFocus();
         kieSession.fireAllRules();
 
+    }
+
+
+    public Object addChocolate(Chocolate chocolate){
+        List<Chocolate> chocolates = repository.getChocolates();
+
+        Chocolate retVal = chocolates.stream().filter(c->c.getName().equals(chocolate.getName())).findFirst().orElse(null);
+
+        if (retVal == null){
+            this.repository.addChocolate(chocolate);
+            return chocolate;
+        }
+        else{
+            return "\"" + " Chocolate name you entered already exist !" + "\"";
+        }
+
+    }
+    public String addIngredient(String ingredient){
+        return this.repository.addIngredient(ingredient);
     }
 
 

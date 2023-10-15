@@ -9,20 +9,20 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-
 query chocolateGradingFarAway(String $chocolateName, String $email)
-     exists(ChocolateGrade(chocolateName == $chocolateName , grade>3, $email2 :userEmail, userEmail != $email)) and
-     chocolateNotGradedByThatUser($chocolateName, $email ;) and
+     ChocolateGrade(chocolateName == $chocolateName , grade>3, $email2 :userEmail, userEmail != $email) and
+     not(exists(ChocolateGrade(userEmail == $email, chocolateName == $chocolateName))) and
+ //    chocolateNotGradedByThatUser($chocolateName, $email ;) and
      not(chocolateSamePeopleGraded($chocolateName,$email;))
-     and  exists(chainingChocolate($chocolateName,$email;))
+     and  exists(chainingChocolate($chocolateName,$email2;))
 
 end
 
 
 
 
-query chainingChocolate(String $chocolateName, String $email)
-       ChocolateGrade(chocolateName == $chocolateName , grade>3, $email2 :userEmail, userEmail != $email) and
+query chainingChocolate(String $chocolateName, String $email2)
+       //ChocolateGrade(chocolateName == $chocolateName , grade>3, $email2 :userEmail, userEmail != $email) and
             atLeastTwoGoodGrades($email2;) and
       (
       otherKnownUserGrading($email3,email2;)   and    otherKnownUserGrading($email,$email3;)

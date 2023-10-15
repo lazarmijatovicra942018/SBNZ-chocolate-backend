@@ -2,6 +2,7 @@ package chocolate_recomendation.controller;
 import chocolate_recomendation.service.ChocolateService;
 import demo.facts.Chocolate;
 import demo.facts.ChocolatePurchase;
+import demo.facts.User;
 import org.apache.maven.shared.invoker.MavenInvocationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,14 +30,10 @@ public class ChocolateController {
         this.chocolateService = chocolateService;
     }
 
-
-
-
     @RequestMapping(value = "/discount/{amount}", method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
     public List<Chocolate> findDiscountChocolateWithAmount(@PathVariable int amount) {
         return chocolateService.getDiscountedChocolateWithAmount(amount);
     }
-
 
     @RequestMapping( method=RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
     public List<Chocolate> findAll() {
@@ -69,6 +66,12 @@ public class ChocolateController {
 
     }
 
+    @RequestMapping(value = "/ingredients/add/{ingredient}", method = RequestMethod.POST)
+    public ResponseEntity<String> addIngredient(@PathVariable String ingredient) {
+        return new ResponseEntity<>(chocolateService.addIngredient(ingredient), HttpStatus.OK);
+    }
+
+
     @RequestMapping(value = "/grade/{chocolateName}/{grade}", method = RequestMethod.POST)
     public ResponseEntity<?> register(@PathVariable String chocolateName,@PathVariable int grade) {
         return new ResponseEntity<>(chocolateService.addOrUpdateChocolateGrade(chocolateName,grade), HttpStatus.OK);
@@ -92,7 +95,10 @@ public class ChocolateController {
         return new ResponseEntity<>(chocolateService.addChocolateDiscountRule(chocolateName,discount), HttpStatus.OK);
     }
 
-
+    @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public ResponseEntity<?> addChocolate(@RequestBody Chocolate chocolate) {
+        return new ResponseEntity<>(chocolateService.addChocolate(chocolate), HttpStatus.OK);
+    }
 
 
 }
